@@ -1,7 +1,7 @@
 import reduser from './reducers';
 
-export { default as boardsActions } from './actions';
-export { default as boardsTypes } from './types';
-export { default as boardsSelectors } from './selectors';
+export { default as UserActions } from './actions';
+export { default as UserTypes } from './types';
+export { default as UserSelectors } from './selectors';
 
 export default reduser;

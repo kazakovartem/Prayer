@@ -1,9 +1,9 @@
 import * as user from './users';
 
 export const actions = {
-  user: user.boardsActions,
+  user: user.UserActions,
 };
 
 export const selectors = {
-  user: user.boardsSelectors,
+  user: user.UserSelectors,
 };

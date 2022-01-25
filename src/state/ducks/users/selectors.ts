@@ -1,10 +1,10 @@
 import { ICountState } from './types';
 import { createSelector } from 'reselect';
 
-const getUser = (state: ICountState) => state.user;
+const getUser = (state: ICountState) => state.user.count;
 
 function getName() {
-  return createSelector(getUser, (state) => state.count);
+  return createSelector(getUser, (state: number) => state);
 }
 
 export default {

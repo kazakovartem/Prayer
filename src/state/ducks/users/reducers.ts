@@ -2,11 +2,11 @@ import {createReducer} from '@reduxjs/toolkit';
 import * as actions from './actions';
 import {initialState} from './initialState';
 
-const Boards = createReducer(initialState.user, builder => {
+const Users = createReducer(initialState.user, builder => {
   builder
-    .addCase(actions.default.addCount, (state, action) => {
+    .addCase(actions.default.addCount, (state) => {
       state.count++;
     });
 });
 
-export default Boards;
+export default Users;
