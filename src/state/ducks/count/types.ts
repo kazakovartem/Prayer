@@ -5,11 +5,9 @@ export default {
 }
 
 export interface INewBoard {
-  
+  count: number,
 }
 
-export interface ICountState {
-  user: {
-    count: number,
-  },
+export type CountState = {
+  count: number,
 }

@@ -1,9 +1,9 @@
-import * as user from './users';
+import * as count from './count';
 
 export const actions = {
-  user: user.UserActions,
+  count: count.CountActions,
 };
 
 export const selectors = {
-  user: user.UserSelectors,
+  count: count.CountSelectors,
 };
