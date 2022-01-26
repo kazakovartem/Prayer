@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StyleSheet, Text, View, Button} from 'react-native';
@@ -35,6 +35,9 @@ function HomeScreen() {
   const up = () => {
     dispatch(actions.count.addCount());
   };
+  const down = () => {
+    dispatch(actions.count.decCount());
+  };
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text style={[styles.testStyle]}>some home text</Text>
@@ -43,28 +46,34 @@ function HomeScreen() {
         onPress={() => navigation.navigate(Routes.Double)}
       />
       <Separator />
-      <Button title="Double" onPress={() => up} />
+      <Button title="Double" onPress={() => up()} />
+      <Button title="DoubleOFF" onPress={() => down()} />
       <Separator />
-      <Button
-        title="get ONE"
-        onPress={() => incryment()}
-      />
+      <Button title="get ONE" onPress={() => incryment()} />
       <Separator />
-      <Button
-        title="give ONE"
-        onPress={() => decryment()}
-      />
+      <Button title="give ONE" onPress={() => decryment()} />
       <Text style={[styles.testStyle]}>{count}</Text>
     </View>
   );
 }
 
 function DoubleScreen() {
-  const count: number = useSelector(selectors.count.getCountSelector());
+  const count = useSelector(selectors.count.getCountSelector());
+  const dispatch = useDispatch();
+  const up = () => {
+    dispatch(actions.count.addCount());
+  };
+  const down = () => {
+    dispatch(actions.count.decCount());
+  };
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text style={[styles.testStyle]}>Duble: {count},2,33</Text>
+      <Text style={[styles.testStyle]}>Duble: {count}</Text>
+      <Separator />
+      <Button title="Double" onPress={() => up()} />
+      <Separator />
+      <Button title="DoubleOFF" onPress={() => down()} />
     </View>
   );
 }
@@ -76,7 +85,7 @@ const TestContainer = () => {
         <Stack.Screen
           name={Routes.Home}
           component={HomeScreen}
-          options={{title: 'sreen'}}
+          options={{title: 'sreen home'}}
         />
         <Stack.Screen name={Routes.Double} component={DoubleScreen} />
       </Stack.Navigator>
