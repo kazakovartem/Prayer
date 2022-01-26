@@ -4,10 +4,6 @@ export default {
   ADD_COUNT,
 }
 
-export interface INewBoard {
-  count: number,
-}
-
 export type CountState = {
   count: number,
 }

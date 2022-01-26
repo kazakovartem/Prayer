@@ -1,5 +1,5 @@
-import { ICountState } from './types';
+import {CountState} from './types';
 
-export const initialState: ICountState = {
-  count: 2
-}
+export const initialState: CountState = {
+  count: 2,
+};

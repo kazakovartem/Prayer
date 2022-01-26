@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React,{useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StyleSheet, Text, View, Button} from 'react-native';
@@ -29,6 +29,9 @@ const Stack = createNativeStackNavigator<MainNavigatorParamsList>();
 function HomeScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation<MainNavigationProp<Routes.Home>>();
+  const [count, setCount] = useState(0);
+  const incryment = () => setCount(prevCount => prevCount + 1);
+  const decryment = () => setCount(prevCount => prevCount - 1);
   const up = () => {
     dispatch(actions.count.addCount());
   };
@@ -41,6 +44,17 @@ function HomeScreen() {
       />
       <Separator />
       <Button title="Double" onPress={() => up} />
+      <Separator />
+      <Button
+        title="get ONE"
+        onPress={() => incryment()}
+      />
+      <Separator />
+      <Button
+        title="give ONE"
+        onPress={() => decryment()}
+      />
+      <Text style={[styles.testStyle]}>{count}</Text>
     </View>
   );
 }
