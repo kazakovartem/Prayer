@@ -35,6 +35,7 @@ function HomeScreen() {
   const up = () => {
     dispatch(actions.count.addCount());
   };
+
   const down = () => {
     dispatch(actions.count.decCount());
   };
