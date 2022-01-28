@@ -3,7 +3,7 @@ import {incrymentCounter} from './sagaWorker';
 import types from './types';
 
 export function* watchIncrymentCounter() {
-  //yield takeLatest(types.ADD_COUNT, incrymentCounter());
+  //yield takeLatest(types.ADD_COUNT, incrymentCounter);
   
   while(true){
     console.log('3443');
