@@ -34,7 +34,7 @@ function HomeScreen() {
   const decryment = () => setCount(prevCount => prevCount - 1);
   const up = () => {
     //dispatch(actions.count.addCount());
-    dispatch({type: 'ADD_COUNT'});
+    dispatch({type: 'addC'});
   };
 
   const down = () => {
@@ -63,7 +63,7 @@ function DoubleScreen() {
   const count = useSelector(selectors.count.getCountSelector());
   const dispatch = useDispatch();
   const up = () => {
-    dispatch({type: 'ADD_COUNT'});
+    dispatch({type: 'addC'});
   };
   const down = () => {
     dispatch(actions.count.decCount());

@@ -1,6 +1,7 @@
-import {createReducer} from '@reduxjs/toolkit';
+import {createReducer, createSlice} from '@reduxjs/toolkit';
 import * as actions from './actions';
 import {initialState} from './initialState';
+import types from './types';
 
 const Count = createReducer(initialState.count, builder => {
   builder
