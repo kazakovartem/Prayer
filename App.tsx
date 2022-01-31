@@ -9,10 +9,10 @@
  */
 
 import React from 'react';
-import TestContainer from './src/components/test';
+import MainNavigationContainer from './src/navigation/index';
 
 const App = () => {
-  return <TestContainer />;
+  return <MainNavigationContainer />;
 };
 
 export default App;
