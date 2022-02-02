@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {StyleSheet, Text, View, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {selectors} from '../state/ducks/ducks';
-import {actions} from '../state/ducks/ducks';
-import {StackNavigationProp} from '@react-navigation/stack';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectors } from '../state/ducks/ducks';
+import { actions } from '../state/ducks/ducks';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const Separator = () => <View style={styles.separator} />;
 
@@ -20,9 +20,8 @@ type MainNavigatorParamsList = {
   [Routes.Double]: undefined;
 };
 
-type MainNavigationProp<
-  RouteName extends keyof MainNavigatorParamsList = string | any,
-> = StackNavigationProp<MainNavigatorParamsList, RouteName>;
+type MainNavigationProp<RouteName extends keyof MainNavigatorParamsList = string | any> =
+  StackNavigationProp<MainNavigatorParamsList, RouteName>;
 
 const Stack = createNativeStackNavigator<MainNavigatorParamsList>();
 
@@ -30,23 +29,20 @@ function HomeScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation<MainNavigationProp<Routes.Home>>();
   const [count, setCount] = useState(0);
-  const incryment = () => setCount(prevCount => prevCount + 1);
-  const decryment = () => setCount(prevCount => prevCount - 1);
+  const incryment = () => setCount((prevCount) => prevCount + 1);
+  const decryment = () => setCount((prevCount) => prevCount - 1);
   const up = () => {
     //dispatch(actions.count.addCount());
-    dispatch({type: 'addC'});
+    dispatch({ type: 'addC' });
   };
 
   const down = () => {
     dispatch(actions.count.decCount());
   };
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={[styles.testStyle]}>some home text</Text>
-      <Button
-        title="Go to Double"
-        onPress={() => navigation.navigate(Routes.Double)}
-      />
+      <Button title="Go to Double" onPress={() => navigation.navigate(Routes.Double)} />
       <Separator />
       <Button title="Double" onPress={() => up()} />
       <Button title="DoubleOFF" onPress={() => down()} />
@@ -60,17 +56,17 @@ function HomeScreen() {
 }
 
 function DoubleScreen() {
-  const count = useSelector(selectors.count.getCountSelector());
+  const count = useSelector(selectors.count.selectCount());
   const dispatch = useDispatch();
   const up = () => {
-    dispatch({type: 'addC'});
+    dispatch({ type: 'addC' });
   };
   const down = () => {
     dispatch(actions.count.decCount());
   };
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={[styles.testStyle]}>Duble: {count}</Text>
       <Separator />
       <Button title="Double" onPress={() => up()} />
@@ -84,11 +80,7 @@ const TestContainer = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name={Routes.Home}
-          component={HomeScreen}
-          options={{title: 'sreen home'}}
-        />
+        <Stack.Screen name={Routes.Home} component={HomeScreen} options={{ title: 'sreen home' }} />
         <Stack.Screen name={Routes.Double} component={DoubleScreen} />
       </Stack.Navigator>
     </NavigationContainer>

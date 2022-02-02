@@ -7,3 +7,33 @@ export type RootStackParamList = {
   SignUp: undefined;
 };
 export type authScreenProp = StackNavigationProp<RootStackParamList, 'SignUp'>;
+
+export type User = {
+  name: string;
+  email: string;
+  token: string;
+  id: number;
+  logged: boolean;
+};
+
+export type Column = {
+  title: string;
+  description: string;
+  id: number;
+};
+export type Prayers = {
+  id: number;
+  title: string;
+  description: string;
+  checked: boolean;
+  columnId: number;
+  commentsIds: number[];
+};
+
+export type Comments = {
+  id: number;
+  body: string;
+  created: string;
+  prayerId: number;
+  userId: number;
+};

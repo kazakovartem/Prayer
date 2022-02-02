@@ -12,7 +12,8 @@ const UnknownUserNavigation = () => {
       initialRouteName={Routes.SignIn}
       screenOptions={{
         headerShown: false,
-      }}>
+      }}
+    >
       <Stack.Screen name={Routes.SignIn} component={Authorisation} />
       <Stack.Screen name={Routes.SignUp} component={Registration} />
     </Stack.Navigator>
