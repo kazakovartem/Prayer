@@ -10,8 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { Routes } from '../navigation/types';
 import { authScreenProp } from '../types/index';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectors } from '../state/ducks/ducks';
+import { useDispatch } from 'react-redux';
 import { actions } from '../state/ducks/ducks';
 import { useForm, Controller } from 'react-hook-form';
 import SignInButton from '../UI/SignButton/SignButton';
@@ -32,8 +31,7 @@ const AuthenticationScreen = () => {
     },
   });
   const onSubmit = (data: any) => {
-    console.log(data);
-    //dispatch(actions.user.signIn({ email: data.email, password: data.password }));
+    dispatch(actions.user.signIn({ email: data.email, password: data.password }));
   };
 
   return (

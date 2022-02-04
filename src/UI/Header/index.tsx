@@ -3,11 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  Button,
+  Image,
   Pressable,
-  ScrollView,
-  TextInput,
 } from 'react-native';
 
 const LoginHeader = (props: { label: string;}) => {
@@ -19,7 +16,7 @@ const LoginHeader = (props: { label: string;}) => {
             console.log('tik');
           }}
         >
-          <Text>+</Text>
+          <Image source={require('../../assets/image/Union.png')}  style={{width: 15, height: 15}}/>
         </Pressable>
       </View>
   );

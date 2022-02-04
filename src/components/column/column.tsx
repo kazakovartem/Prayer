@@ -1,13 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { authScreenProp } from '../../types/index';
+import { Routes } from '../../navigation/types';
 
-const Column = (props: { label: string;}) => {
+const Column = (props: { label: string,idColumn:number,}) => {
+  const navigation = useNavigation<any>();
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.touch}
         onPress={() => {
-          console.log('press');
+          navigation.navigate(Routes.Prayers,{
+            itemId: props.idColumn,
+            otherParam: 'anything you want here'
+          });
         }}
       >
         <Text style={styles.text}>{props.label}</Text>
@@ -26,7 +33,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     borderStyle: 'solid',
-    borderBottomColor: '#E5E5E5',
+    borderColor: '#E5E5E5',
   },
   touch:{
     width: '100%',

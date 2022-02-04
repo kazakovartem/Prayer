@@ -1,13 +1,17 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { sagasType } from '../types';
+import { call, put, takeLeading } from 'redux-saga/effects';
+import { sagasTypeUser } from '../types';
 import types from '../types';
-import { signIn, signUp } from '../../../../api/user';
+import { routsDirect } from '../../../../api/routsDirect';
 import columnTypes from '../../columns/types';
+import { sagasTypeColumns } from '../../columns/types';
+import { sagasTypePrayers } from '../../prayers/types';
+import { sagasTypeComments } from '../../comments/types';
+import { IAddUserInState } from '../types';
 
-export function* addUserInState({ payload }: any) {
+export function* addUserInState({ payload }: IAddUserInState) {
   try {
-    const { data } = yield call(signIn, payload.email, payload.password);
-    console.log('data:', data);
+    const { data } = yield call(routsDirect.user.signIn, payload.email, payload.password);
+
     yield put({
       type: types.ADD_USER,
       payload: {
@@ -17,21 +21,32 @@ export function* addUserInState({ payload }: any) {
         id: data.id,
       },
     });
+    yield put({type: sagasTypeColumns.CREATE_COLUMNS});
+    yield put({type: sagasTypePrayers.GET_PRAYERS});
+    yield put({type: sagasTypeComments.GET_COMMENTS});
   } catch (error) {
     console.log(error);
   }
 }
 
-export function* addUserNewInState({ payload }: any) {
+export function* addUserNewInState({ payload }: IAddUserInState) {
   try {
-    const { data } = yield call(signUp, payload.email, payload.name, payload.password);
-    const columns = data.columns
+    const { data } = yield call(
+      routsDirect.user.signUp,
+      payload.email,
+      payload.name,
+      payload.password,
+    );
+
+    const columns = data.columns;
+
     yield put({
       type: columnTypes.ADD_COLUMNS,
       payload: {
-        columns
+        columns,
       },
     });
+
     yield put({
       type: types.ADD_USER,
       payload: {
@@ -41,20 +56,22 @@ export function* addUserNewInState({ payload }: any) {
         id: data.id,
       },
     });
+
   } catch (error) {
     console.log(error);
   }
 }
 
 export function* watchSignIn() {
-  yield takeLatest(sagasType.SIGN_IN, addUserInState);
+  yield takeLeading(sagasTypeUser.SIGN_IN, addUserInState);
 }
 
 export function* watchSignUp() {
-  yield takeLatest(sagasType.SIGN_UP, addUserNewInState);
+  yield takeLeading(sagasTypeUser.SIGN_UP, addUserNewInState);
 }
 
 export default {
   watchSignUp,
   watchSignIn,
 };
+

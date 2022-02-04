@@ -6,15 +6,28 @@ import { ColumnState } from './types';
 const Columns = createReducer(initialState.columns, (builder) => {
   builder
     .addCase(actions.default.addColumn, (state, action) => {
-      state[action.payload.id].description = action.payload.description;
-      state[action.payload.id].title = action.payload.title;
-      state[action.payload.id].id = action.payload.id;
+      state.push(action.payload);
       return state;
     })
     .addCase(actions.default.addColumns, (state, action) => {
       action.payload.columns.map((column:ColumnState) => {
         state.push(column);
+        
       })
+      return state;
+    })
+    .addCase(actions.default.dellAllColumns, (state) => {
+      return [...state.filter((column) => column.id == null)];
+    })
+    .addCase(actions.default.dellColumnById, (state, action) => {
+      return [...state.filter((column) => column.id == action.payload.id)];
+    })
+    .addCase(actions.default.updateColumnById, (state, action) => {
+      const change = state.find((column) => column.id === action.payload.id);
+      if (change) {
+        change.description = action.payload.description;
+        change.title = action.payload.title;
+      }
       return state;
     });
 });

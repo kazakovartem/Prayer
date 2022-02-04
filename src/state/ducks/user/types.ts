@@ -4,7 +4,7 @@ export default {
   ADD_USER,
 };
 
-export const sagasType = {
+export const sagasTypeUser = {
   SIGN_IN: 'SIGN_IN',
   SIGN_UP: 'SIGN_UP', 
 };
@@ -37,3 +37,12 @@ export type UserState = {
     logged: boolean;
   };
 };
+
+export interface IAddUserInState {
+  type: string;
+  payload: {
+    password: string;
+    email: string;
+    name: string;
+  };
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Authorisation from '../screens/AuthorisationScreen';
+import Authorizations from '../screens/AuthorizationsScreen';
 import Registration from '../screens/RegistrationScreen';
 import { Routes } from './types';
 
@@ -14,7 +14,7 @@ const UnknownUserNavigation = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name={Routes.SignIn} component={Authorisation} />
+      <Stack.Screen name={Routes.SignIn} component={Authorizations} />
       <Stack.Screen name={Routes.SignUp} component={Registration} />
     </Stack.Navigator>
   );

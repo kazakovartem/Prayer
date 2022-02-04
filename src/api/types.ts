@@ -1,6 +1,6 @@
-export const API_LINK = 'https://prayer.herokuapp.com';
-export const COLUMNS_LINK = `/columns`;
-export const PRAYERS_LINK = `/prayers`;
-export const SIGN_IN_LINK = `/auth/sign-in`;
-export const SIGN_UP_LINK = `/auth/sign-up`;
-export const COMMENTS_LINK = `/comments`;
+export const API = 'https://prayer.herokuapp.com';
+export const COLUMNS = `/columns`;
+export const PRAYERS = `/prayers`;
+export const SIGN_IN = `/auth/sign-in`;
+export const SIGN_UP = `/auth/sign-up`;
+export const COMMENTS = `/comments`;

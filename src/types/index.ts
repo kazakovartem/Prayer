@@ -5,8 +5,10 @@ import { Routes } from '../navigation/types';
 export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
+  Columns: undefined;
+  Prayers: undefined;
 };
-export type authScreenProp = StackNavigationProp<RootStackParamList, 'SignUp'>;
+export type authScreenProp = StackNavigationProp<RootStackParamList, 'SignUp' | 'Prayers'>;
 
 export type User = {
   name: string;
@@ -35,5 +37,4 @@ export type Comments = {
   body: string;
   created: string;
   prayerId: number;
-  userId: number;
 };

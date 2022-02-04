@@ -1,13 +1,13 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { store } from '../state/store';
-import { API_LINK } from './types';
+import { API } from './types';
 
 const headers = {
   'Content-type': 'application/json',
   'accept': '*/*',
 };
 const axiosCfg: AxiosRequestConfig = {
-  baseURL: API_LINK,
+  baseURL: API,
   headers: headers,
 };
 export const api = axios.create(axiosCfg);
