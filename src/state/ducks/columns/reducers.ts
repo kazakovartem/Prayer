@@ -20,7 +20,7 @@ const Columns = createReducer(initialState.columns, (builder) => {
       return [...state.filter((column) => column.id == null)];
     })
     .addCase(actions.default.dellColumnById, (state, action) => {
-      return [...state.filter((column) => column.id == action.payload.id)];
+      return [...state.filter((column) => column.id !== action.payload.id)];
     })
     .addCase(actions.default.updateColumnById, (state, action) => {
       const change = state.find((column) => column.id === action.payload.id);

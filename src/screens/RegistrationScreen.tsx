@@ -26,11 +26,9 @@ const RegistrationScreen = () => {
       password: '',
     },
   });
-  const count2 = useSelector(selectors.columns.selectAllColumns());
+
   const onSubmit = (data: any) => {
     dispatch(actions.user.signUp({ email: data.email, name: data.name, password: data.password }));
-    console.log('user:',user);
-    console.log('col:',count2);
   };
 
   return (

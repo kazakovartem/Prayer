@@ -1,24 +1,18 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-} from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 
-const LoginHeader = (props: { label: string;}) => {
-  return(
+const LoginHeader = (props: { label: string }) => {
+  return (
     <View style={styles.header}>
-        <Text style={styles.screenTitle}>{props.label}</Text>
-        <Pressable
-          onPress={() => {
-            console.log('tik');
-          }}
-        >
-          <Image source={require('../../assets/image/Union.png')}  style={{width: 15, height: 15}}/>
-        </Pressable>
-      </View>
+      <Text style={styles.screenTitle}>{props.label}</Text>
+      <Pressable
+        onPress={() => {
+          console.log('tik');
+        }}
+      >
+        <Image source={require('../../assets/image/Union.png')} style={{ width: 15, height: 15 }} />
+      </Pressable>
+    </View>
   );
 };
 

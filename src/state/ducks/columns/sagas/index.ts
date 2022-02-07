@@ -28,10 +28,11 @@ export function* addColumnsInState() {
 
 export function* addColumnInState({ payload }: IAddColumnInState) {
   try {
+    console.log(payload);
     const { data } = yield call(
       routsDirect.columns.createNewColumn,
-      payload.description,
       payload.title,
+      payload.description,
     );
     yield put({
       type: types.ADD_COLUMN,
@@ -48,20 +49,15 @@ export function* addColumnInState({ payload }: IAddColumnInState) {
 
 export function* updateColumnInState({ payload }: IUpdateColumnInState) {
   try {
-    const { data } = yield call(
-      routsDirect.columns.updateColumn,
-      payload.id,
-      payload.description,
-      payload.title,
-    );
     yield put({
       type: types.UPDATE_COLUMN_BY_ID,
       payload: {
-        description: data.description,
-        id: data.id,
-        title: data.title,
+        description: payload.description,
+        id: payload.id,
+        title: payload.title,
       },
     });
+    yield call(routsDirect.columns.updateColumn, payload.id, payload.title, payload.description);
   } catch (error) {
     console.log(error);
   }
@@ -69,16 +65,13 @@ export function* updateColumnInState({ payload }: IUpdateColumnInState) {
 
 export function* deleteColumnInState({ payload }: IDeleteColumnInState) {
   try {
-    yield call(
-      routsDirect.columns.deleteColumn,
-      payload.id,
-    );
     yield put({
       type: types.DELL_COLUMN_BY_ID,
       payload: {
         id: payload.id,
       },
     });
+    yield call(routsDirect.columns.deleteColumn, payload.id);
   } catch (error) {
     console.log(error);
   }

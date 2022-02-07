@@ -6,6 +6,7 @@ export default function* rootSaga() {
     sagaWatchers.user.watchSignIn(),
     sagaWatchers.user.watchSignUp(),
     sagaWatchers.columns.watchAddColumns(),
+    sagaWatchers.columns.watchAddColumn(),
     sagaWatchers.columns.watchUpdateColumn(),
     sagaWatchers.columns.watchDeleteColumn(),
     sagaWatchers.prayers.watchAddALLPrayers(),

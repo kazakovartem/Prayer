@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  Image,
 } from 'react-native';
-import Header from '../UI/Header';
 import { useNavigation } from '@react-navigation/native';
 import { authScreenProp } from '../types/index';
 import { Routes } from '../navigation/types';
@@ -23,7 +23,16 @@ const ColumnsScreen = ({ route }: any) => {
 
   return (
     <View style={styles.content}>
-      <Header label="TO DO" />
+      <View style={styles.header}>
+        <Text style={styles.screenTitle}>{otherParam}</Text>
+        <Pressable
+          onPress={() => {
+            console.log('tik Prayers');
+          }}
+        >
+        <Image source={require('../assets/image/Union.png')}  style={{width: 15, height: 15}}/>
+        </Pressable>
+      </View>
       <View style={styles.body}>
         <View style={styles.inputAdd}>
           <Pressable
@@ -54,6 +63,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     height: '100%',
     width: '100%',
+  },
+  header: {
+    borderBottomColor: '#E5E5E5',
+    borderBottomWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    paddingRight: 15,
+  },
+  screenTitle: {
+    fontFamily: 'SFUIDisplay-Thin',
+    marginVertical: 22,
+    fontSize: 17,
+    lineHeight: 20,
+    marginRight: '36%',
   },
   body: {
     paddingTop: 15,

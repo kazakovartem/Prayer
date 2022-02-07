@@ -20,8 +20,8 @@ const updateColumnById = createAction<IUpdateColumns>(types.UPDATE_COLUMN_BY_ID)
 
 const createColumnSaga = createAction<ICreateColumnSaga>(sagasTypeColumns.CREATE_COLUMN);
 const createColumnsSaga = createAction<ICreateColumnsSaga>(sagasTypeColumns.CREATE_COLUMNS);
-const deleteColumnSaga = createAction<IDeleteColumnSaga>(sagasTypeColumns.CREATE_COLUMN);
-const updateColumnSaga = createAction<IUpdateColumnsSaga>(sagasTypeColumns.CREATE_COLUMN);
+const deleteColumnSaga = createAction<IDeleteColumnSaga>(sagasTypeColumns.DELETE_COLUMN);
+const updateColumnSaga = createAction<IUpdateColumnsSaga>(sagasTypeColumns.UPDATE_COLUMN);
 
 export default {
   addColumn,

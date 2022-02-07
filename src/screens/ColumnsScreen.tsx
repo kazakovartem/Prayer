@@ -15,10 +15,21 @@ import { Routes } from '../navigation/types';
 import Column from '../components/column/column';
 import { selectors } from '../state/ducks/ducks';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { actions } from '../state/ducks/ducks';
+
 
 const ColumnsScreen = () => {
   const columns = useSelector(selectors.columns.selectAllColumns());
-  const [viewAddInput,setViewAddInput] = useState(false);
+  const [viewAddInput, setViewAddInput] = useState(false);
+  const [addNewColumnText, setAddNewColumnText] = useState('');
+  const dispatch = useDispatch();
+
+  const handleNewColumn = () => {
+    setViewAddInput(false);
+    dispatch(actions.columns.createColumnSaga({title: addNewColumnText, description: ''}));
+    setAddNewColumnText('');
+  };
   return (
     <>
       <View style={styles.content}>
@@ -39,12 +50,16 @@ const ColumnsScreen = () => {
           {columns.map((column) => {
             return <Column label={column.title} idColumn={column.id} key={column.id} />;
           })}
-          <View style={viewAddInput ? styles.newColl : {display:'none'} }>
-            <TextInput style={styles.textInput}></TextInput>
+          <View style={viewAddInput ? styles.newColl : { display: 'none' }}>
+            <TextInput
+              style={styles.textInput}
+              value={addNewColumnText}
+              onChangeText={setAddNewColumnText}
+            />
 
             <TouchableOpacity
               onPress={() => {
-                setViewAddInput(false);
+                handleNewColumn();
               }}
             >
               <View style={styles.touchInput}></View>
