@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  inputText:{
+  inputText: {
     marginTop: 23,
   },
   input: {

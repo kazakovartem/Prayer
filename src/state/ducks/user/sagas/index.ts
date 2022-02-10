@@ -21,9 +21,9 @@ export function* addUserInState({ payload }: IAddUserInState) {
         id: data.id,
       },
     });
-    yield put({type: sagasTypeColumns.CREATE_COLUMNS});
-    yield put({type: sagasTypePrayers.GET_PRAYERS});
-    yield put({type: sagasTypeComments.GET_COMMENTS});
+    yield put({ type: sagasTypeColumns.CREATE_COLUMNS });
+    yield put({ type: sagasTypePrayers.GET_PRAYERS });
+    yield put({ type: sagasTypeComments.GET_COMMENTS });
   } catch (error) {
     console.log(error);
   }
@@ -56,7 +56,6 @@ export function* addUserNewInState({ payload }: IAddUserInState) {
         id: data.id,
       },
     });
-
   } catch (error) {
     console.log(error);
   }
@@ -74,4 +73,3 @@ export default {
   watchSignUp,
   watchSignIn,
 };
-

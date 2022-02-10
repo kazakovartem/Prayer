@@ -35,13 +35,13 @@ export interface IAddComments {
   }[];
 }
 
-export interface IDeleteAllComments{}
+export interface IDeleteAllComments {}
 
-export interface IDeleteCommentById{
+export interface IDeleteCommentById {
   id: number;
 }
 
-export interface IUpdateCommentById{
+export interface IUpdateCommentById {
   id: number;
   body: string;
 }
@@ -67,7 +67,7 @@ export type CommentState = {
   prayerId: number | null;
 };
 
-export interface IAddCommentInState{
+export interface IAddCommentInState {
   type: string;
   payload: {
     id: number;
@@ -75,14 +75,14 @@ export interface IAddCommentInState{
   };
 }
 
-export interface IDeleteCommentInState{
+export interface IDeleteCommentInState {
   type: string;
   payload: {
     id: number;
   };
 }
 
-export interface IUpdateCommentInState{
+export interface IUpdateCommentInState {
   type: string;
   payload: {
     id: number;

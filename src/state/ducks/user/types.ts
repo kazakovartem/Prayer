@@ -6,7 +6,7 @@ export default {
 
 export const sagasTypeUser = {
   SIGN_IN: 'SIGN_IN',
-  SIGN_UP: 'SIGN_UP', 
+  SIGN_UP: 'SIGN_UP',
 };
 
 export interface IAddUser {

@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import types,{ sagasTypeUser } from './types';
+import types, { sagasTypeUser } from './types';
 import { IAddUser, IUserSignIn, IUserSignUp } from './types';
 
 const addUser = createAction<IAddUser>(types.ADD_USER);

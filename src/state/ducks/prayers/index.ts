@@ -5,5 +5,4 @@ export { default as PrayersTypes } from './types';
 export { default as PrayersSelectors } from './selectors';
 export { default as PrayersSagaWatchers } from './sagas';
 
-
 export default reduser;

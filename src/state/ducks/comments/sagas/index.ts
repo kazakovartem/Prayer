@@ -29,11 +29,7 @@ export function* addCommentsInState() {
 
 export function* addCommentInState({ payload }: IAddCommentInState) {
   try {
-    const { data } = yield call(
-      routsDirect.comments.createNewComment,
-      payload.id,
-      payload.body,
-    );
+    const { data } = yield call(routsDirect.comments.createNewComment, payload.id, payload.body);
 
     yield put({
       type: types.ADD_COMMENT,
@@ -59,7 +55,6 @@ export function* deleteCommentInState({ payload }: IDeleteCommentInState) {
     });
 
     yield call(routsDirect.comments.deleteComment, payload.id);
-
   } catch (error) {
     console.log(error);
   }
@@ -67,9 +62,9 @@ export function* deleteCommentInState({ payload }: IDeleteCommentInState) {
 
 export function* updateCommentInState({ payload }: IUpdateCommentInState) {
   try {
-    console.log('payload',payload);
-    const { data } = yield call(routsDirect.comments.updateComment, payload.id ,payload.body );
-    console.log('data',data);
+    console.log('payload', payload);
+    const { data } = yield call(routsDirect.comments.updateComment, payload.id, payload.body);
+    console.log('data', data);
     yield put({
       type: types.UPDATE_COMMENT_BY_ID,
       payload: {
@@ -77,7 +72,6 @@ export function* updateCommentInState({ payload }: IUpdateCommentInState) {
         body: data.body,
       },
     });
-
   } catch (error) {
     console.log(error);
   }

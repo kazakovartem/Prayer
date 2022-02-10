@@ -34,7 +34,7 @@ const Comment = (props: { idComment: number; count: number }) => {
     if (!viewAddInput) {
       setViewAddInput(true);
     } else {
-      if (text !== inputValueLocal){
+      if (text !== inputValueLocal) {
         console.log('Change:', text);
         dispatch(actions.comments.updateCommentSaga({ id: idLocal, body: text }));
       }
@@ -88,9 +88,7 @@ const Comment = (props: { idComment: number; count: number }) => {
             <View style={{ display: 'flex', flexDirection: 'column', height: 50, marginLeft: 9 }}>
               <View style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
                 <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
-                <Text style={{ fontSize: 13, color: '#9C9C9C' }}>
-                  {timeDay} days ago
-                </Text>
+                <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
               </View>
               <TextInput style={styles.textInput} value={text} onChangeText={setOnChangeText} />
             </View>
@@ -106,9 +104,7 @@ const Comment = (props: { idComment: number; count: number }) => {
                   style={{ display: 'flex', flexDirection: 'row', marginTop: 15, marginBottom: 2 }}
                 >
                   <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
-                  <Text style={{ fontSize: 13, color: '#9C9C9C' }}>
-                    {timeDay} days ago
-                  </Text>
+                  <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
                 </View>
                 <Text style={{ fontSize: 17 }}>{comment?.body}</Text>
               </View>

@@ -97,7 +97,7 @@ export interface IUpdatePrayerInState {
   };
 }
 
-export interface IDeletePrayerInState{
+export interface IDeletePrayerInState {
   type: string;
   payload: {
     id: number;

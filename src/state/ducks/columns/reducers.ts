@@ -10,10 +10,9 @@ const Columns = createReducer(initialState.columns, (builder) => {
       return state;
     })
     .addCase(actions.default.addColumns, (state, action) => {
-      action.payload.columns.map((column:ColumnState) => {
+      action.payload.columns.map((column: ColumnState) => {
         state.push(column);
-        
-      })
+      });
       return state;
     })
     .addCase(actions.default.dellAllColumns, (state) => {

@@ -24,7 +24,7 @@ const Prayer = (props: { label: string; idPrayer: number; isChecked: boolean }) 
     if (!viewUpdateInput) {
       setViewUpdateInput(true);
     } else {
-      if (text !== props.label){
+      if (text !== props.label) {
         let idLocal = 0;
         let descriptionLocal = '';
         if (prayer?.id) {

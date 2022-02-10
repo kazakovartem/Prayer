@@ -10,15 +10,15 @@ const Columns = createReducer(initialState.prayers, (builder) => {
       return state;
     })
     .addCase(actions.default.addPrayers, (state, action) => {
-      action.payload.prayers.map((prayer:PrayerState) => {
+      action.payload.prayers.map((prayer: PrayerState) => {
         state.push(prayer);
-      })
+      });
       return state;
     })
-    .addCase(actions.default.dellPrayerById , (state, action) => {
+    .addCase(actions.default.dellPrayerById, (state, action) => {
       return [...state.filter((prayer) => prayer.id !== action.payload.id)];
     })
-    .addCase(actions.default.dellAllPrayers , (state) => {
+    .addCase(actions.default.dellAllPrayers, (state) => {
       return [...state.filter((prayer) => prayer.id == null)];
     })
     .addCase(actions.default.updatePrayerById, (state, action) => {

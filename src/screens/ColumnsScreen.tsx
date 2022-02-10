@@ -18,7 +18,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { actions } from '../state/ducks/ducks';
 
-
 const ColumnsScreen = () => {
   const columns = useSelector(selectors.columns.selectAllColumns());
   const [viewAddInput, setViewAddInput] = useState(false);
@@ -27,7 +26,7 @@ const ColumnsScreen = () => {
 
   const handleNewColumn = () => {
     setViewAddInput(false);
-    dispatch(actions.columns.createColumnSaga({title: addNewColumnText, description: ''}));
+    dispatch(actions.columns.createColumnSaga({ title: addNewColumnText, description: '' }));
     setAddNewColumnText('');
   };
   return (

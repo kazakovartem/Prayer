@@ -10,12 +10,12 @@ const Comments = createReducer(initialState.comments, (builder) => {
       return state;
     })
     .addCase(actions.default.addComments, (state, action) => {
-      action.payload.columns.map((column:CommentState) => {
+      action.payload.columns.map((column: CommentState) => {
         state.push(column);
-      })
+      });
       return state;
     })
-    .addCase(actions.default.deleteAllComments , (state) => {
+    .addCase(actions.default.deleteAllComments, (state) => {
       return [...state.filter((comment) => comment.id == null)];
     })
     .addCase(actions.default.deleteCommentById, (state, action) => {

@@ -10,10 +10,10 @@ import {
   TextInput,
 } from 'react-native';
 
-const LoginHeader = (props: { label: string;}) => {
-  return(
+const LoginHeader = (props: { label: string }) => {
+  return (
     <View style={styles.header}>
-        <Text style={styles.screenTitle}>{props.label}</Text>
+      <Text style={styles.screenTitle}>{props.label}</Text>
     </View>
   );
 };
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',   
+    justifyContent: 'center',
     paddingRight: 20,
   },
   screenTitle: {
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     marginVertical: 22,
     fontSize: 17,
     lineHeight: 20,
-    
   },
 });
 //marginRight: '2%',
