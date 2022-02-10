@@ -62,9 +62,8 @@ export function* deleteCommentInState({ payload }: IDeleteCommentInState) {
 
 export function* updateCommentInState({ payload }: IUpdateCommentInState) {
   try {
-    console.log('payload', payload);
     const { data } = yield call(routsDirect.comments.updateComment, payload.id, payload.body);
-    console.log('data', data);
+
     yield put({
       type: types.UPDATE_COMMENT_BY_ID,
       payload: {

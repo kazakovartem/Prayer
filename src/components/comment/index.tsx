@@ -17,7 +17,7 @@ const Comment = (props: { idComment: number; count: number }) => {
   if (comment?.body) {
     inputValueLocal = comment?.body;
   }
-  const [text, setOnChangeText] = useState(inputValueLocal);
+  const [textInputUpdate, setOnChangeTextInputUpdate] = useState(inputValueLocal);
   const dispatch = useDispatch();
   const image = [
     require('../../assets/image/comment.png'),
@@ -34,17 +34,15 @@ const Comment = (props: { idComment: number; count: number }) => {
     if (!viewAddInput) {
       setViewAddInput(true);
     } else {
-      if (text !== inputValueLocal) {
-        console.log('Change:', text);
-        dispatch(actions.comments.updateCommentSaga({ id: idLocal, body: text }));
+      if (textInputUpdate !== inputValueLocal) {
+        dispatch(actions.comments.updateCommentSaga({ id: idLocal, body: textInputUpdate }));
       }
-      setOnChangeText(text);
+      setOnChangeTextInputUpdate(textInputUpdate);
       setViewAddInput(false);
     }
   };
 
-  const handleDelete = () => {
-    console.log('Delete');
+  const handleDeleteComment = () => {
     dispatch(actions.comments.deleteCommentSaga({ id: idLocal }));
   };
   let now = new Date();
@@ -71,7 +69,7 @@ const Comment = (props: { idComment: number; count: number }) => {
           <TouchableOpacity
             style={styles.touchRight}
             onPress={() => {
-              handleDelete();
+              handleDeleteComment();
             }}
           >
             <Text style={styles.hiddenTextRight}>Delete</Text>
@@ -90,7 +88,11 @@ const Comment = (props: { idComment: number; count: number }) => {
                 <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
                 <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
               </View>
-              <TextInput style={styles.textInput} value={text} onChangeText={setOnChangeText} />
+              <TextInput
+                style={styles.textInput}
+                value={textInputUpdate}
+                onChangeText={setOnChangeTextInputUpdate}
+              />
             </View>
           </View>
           <View style={viewAddInput ? { display: 'none' } : styles.touch}>

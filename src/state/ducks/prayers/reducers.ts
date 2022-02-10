@@ -3,7 +3,7 @@ import * as actions from './actions';
 import { initialState } from './initialState';
 import { PrayerState } from './types';
 
-const Columns = createReducer(initialState.prayers, (builder) => {
+const Prayers = createReducer(initialState.prayers, (builder) => {
   builder
     .addCase(actions.default.addPrayer, (state, action) => {
       state.push(action.payload);
@@ -32,4 +32,4 @@ const Columns = createReducer(initialState.prayers, (builder) => {
     });
 });
 
-export default Columns;
+export default Prayers;
