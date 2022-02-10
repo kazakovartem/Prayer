@@ -17,8 +17,8 @@ const updateCommentById = createAction<IUpdateCommentById>(types.UPDATE_COMMENT_
 
 const createCommentsSaga = createAction<ICreateComment>(sagasTypeComments.GET_COMMENTS);
 const createCommentSaga = createAction<ICreateComment>(sagasTypeComments.CREATE_COMMENT);
-const deleteCommentSaga = createAction<ICreateComment>(sagasTypeComments.DELETE_COMMENT);
-const updateCommentSaga = createAction<ICreateComment>(sagasTypeComments.UPDATE_COMMENT);
+const deleteCommentSaga = createAction<IDeleteCommentById>(sagasTypeComments.DELETE_COMMENT);
+const updateCommentSaga = createAction<IUpdateCommentById>(sagasTypeComments.UPDATE_COMMENT);
 
 export default {
   addComment,

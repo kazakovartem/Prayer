@@ -53,9 +53,9 @@ export interface IUpdatePrayerById {
 }
 
 export interface ICreatePrayer {
+  id: number;
   title: string;
   description: string | null;
-  checked: boolean;
 }
 
 export type PrayersState = {

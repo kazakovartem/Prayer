@@ -47,6 +47,7 @@ export interface IUpdateCommentById{
 }
 
 export interface ICreateComment {
+  id: number;
   body: string;
 }
 
@@ -85,6 +86,6 @@ export interface IUpdateCommentInState{
   type: string;
   payload: {
     id: number;
-    body: any;
+    body: string;
   };
 }

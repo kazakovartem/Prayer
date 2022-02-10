@@ -15,7 +15,7 @@ export async function getComment(id: number) {
 
 export async function createNewComment(id: number, body: string) {
   return await api
-    .post(`${PRAYERS}/${id}/${COMMENTS}`, { body: body })
+    .post(`${PRAYERS}/${id}${COMMENTS}`, { body: body })
     .catch((error) => {
       return error;
     });
@@ -23,7 +23,7 @@ export async function createNewComment(id: number, body: string) {
 
 export async function updateComment(id: number, body: string) {
   return await api
-    .put(`${PRAYERS}/${id}/${COMMENTS}`, { body: body })
+    .put(`${COMMENTS}/${id}`, { body: body })
     .catch((error) => {
       return error;
     });

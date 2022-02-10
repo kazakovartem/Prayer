@@ -16,7 +16,7 @@ const Columns = createReducer(initialState.prayers, (builder) => {
       return state;
     })
     .addCase(actions.default.dellPrayerById , (state, action) => {
-      return [...state.filter((prayer) => prayer.id == action.payload.id)];
+      return [...state.filter((prayer) => prayer.id !== action.payload.id)];
     })
     .addCase(actions.default.dellAllPrayers , (state) => {
       return [...state.filter((prayer) => prayer.id == null)];

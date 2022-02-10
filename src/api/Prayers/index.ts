@@ -19,7 +19,7 @@ export async function createPrayer(
   description: string | null,
 ) {
   return await api
-    .post(`${COLUMNS}/${id}/${PRAYERS}`, {
+    .post(`${COLUMNS}/${id}${PRAYERS}`, {
       title: title,
       description: description,
       checked: false,

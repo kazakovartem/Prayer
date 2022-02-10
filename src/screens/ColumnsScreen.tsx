@@ -12,7 +12,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { authScreenProp } from '../types/index';
 import { Routes } from '../navigation/types';
-import Column from '../components/column/column';
+import Column from '../components/column';
 import { selectors } from '../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';

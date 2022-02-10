@@ -51,15 +51,15 @@ export function* addCommentInState({ payload }: IAddCommentInState) {
 
 export function* deleteCommentInState({ payload }: IDeleteCommentInState) {
   try {
-    yield call(routsDirect.comments.getAllComments);
-
     yield put({
       type: types.DELETE_COMMENT_BY_ID,
       payload: {
         id: payload.id,
       },
     });
-    
+
+    yield call(routsDirect.comments.deleteComment, payload.id);
+
   } catch (error) {
     console.log(error);
   }
@@ -67,9 +67,11 @@ export function* deleteCommentInState({ payload }: IDeleteCommentInState) {
 
 export function* updateCommentInState({ payload }: IUpdateCommentInState) {
   try {
+    console.log('payload',payload);
     const { data } = yield call(routsDirect.comments.updateComment, payload.id ,payload.body );
+    console.log('data',data);
     yield put({
-      type: types.ADD_COMMENT,
+      type: types.UPDATE_COMMENT_BY_ID,
       payload: {
         id: data.id,
         body: data.body,
@@ -86,7 +88,7 @@ export function* watchAddComments() {
 }
 
 export function* watchAddComment() {
-  yield takeLatest(sagasTypeComments.GET_COMMENTS, addCommentInState);
+  yield takeLatest(sagasTypeComments.CREATE_COMMENT, addCommentInState);
 }
 
 export function* watchDeleteComment() {

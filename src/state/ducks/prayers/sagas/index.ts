@@ -48,7 +48,6 @@ export function* addPrayerInState({ payload }: IAddPrayerInState) {
         commentsIds: data.commentsIds,
       },
     });
-    
   } catch (error) {
     console.log(error);
   }
@@ -56,6 +55,7 @@ export function* addPrayerInState({ payload }: IAddPrayerInState) {
 
 export function* updatePrayerInState({ payload }: IUpdatePrayerInState) {
   try {
+    console.log(payload);
     const { data } = yield call(
       routsDirect.prayers.updatePrayer,
       payload.id,
@@ -70,11 +70,8 @@ export function* updatePrayerInState({ payload }: IUpdatePrayerInState) {
         title: data.title,
         description: data.description,
         checked: data.checked,
-        columnId: data.columnId,
-        commentsIds: data.commentsIds,
       },
     });
-    
   } catch (error) {
     console.log(error);
   }
@@ -82,17 +79,13 @@ export function* updatePrayerInState({ payload }: IUpdatePrayerInState) {
 
 export function* deletePrayerInState({ payload }: IDeletePrayerInState) {
   try {
-    yield call(
-      routsDirect.prayers.deletePrayer,
-      payload.id,
-    );
     yield put({
-      type: types.ADD_PRAYER,
+      type: types.DELL_PRAYER_BY_ID,
       payload: {
         id: payload.id,
       },
     });
-    
+    yield call(routsDirect.prayers.deletePrayer, payload.id);
   } catch (error) {
     console.log(error);
   }

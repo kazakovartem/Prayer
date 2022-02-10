@@ -3,7 +3,7 @@ import * as actions from './actions';
 import { initialState } from './initialState';
 import { CommentState } from './types';
 
-const Columns = createReducer(initialState.comments, (builder) => {
+const Comments = createReducer(initialState.comments, (builder) => {
   builder
     .addCase(actions.default.addComment, (state, action) => {
       state.push(action.payload);
@@ -19,10 +19,10 @@ const Columns = createReducer(initialState.comments, (builder) => {
       return [...state.filter((comment) => comment.id == null)];
     })
     .addCase(actions.default.deleteCommentById, (state, action) => {
-      return [...state.filter((comment) => comment.id == action.payload.id)];
+      return [...state.filter((comment) => comment.id !== action.payload.id)];
     })
     .addCase(actions.default.updateCommentById, (state, action) => {
-      const change = state.find((column) => column.id === action.payload.id);
+      const change = state.find((comment) => comment.id === action.payload.id);
       if (change) {
         change.body = action.payload.body;
       }
@@ -30,4 +30,4 @@ const Columns = createReducer(initialState.comments, (builder) => {
     });
 });
 
-export default Columns;
+export default Comments;

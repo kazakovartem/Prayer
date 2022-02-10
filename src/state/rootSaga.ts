@@ -10,6 +10,7 @@ export default function* rootSaga() {
     sagaWatchers.columns.watchUpdateColumn(),
     sagaWatchers.columns.watchDeleteColumn(),
     sagaWatchers.prayers.watchAddALLPrayers(),
+    sagaWatchers.prayers.watchAddPrayers(),
     sagaWatchers.prayers.watchDeletePrayers(),
     sagaWatchers.prayers.watchUpdatePrayer(),
     sagaWatchers.comments.watchAddComments(),
