@@ -1,4 +1,4 @@
-import { api } from '..';
+import { api } from '../index';
 import { PRAYERS, COLUMNS } from '../types';
 
 export async function getAllPrayers() {

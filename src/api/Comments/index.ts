@@ -1,4 +1,4 @@
-import { api } from '..';
+import { api } from '../index';
 import { COMMENTS, PRAYERS } from '../types';
 
 export async function getAllComments() {
