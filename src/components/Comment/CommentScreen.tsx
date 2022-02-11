@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { authScreenProp } from '../../types/index';
@@ -9,7 +9,12 @@ import { actions } from '../../state/ducks/ducks';
 import { selectors } from '../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 
-const Comment = (props: { idComment: number; count: number }) => {
+type CommentProps = {
+  idComment: number;
+  count: number;
+};
+
+const Comment: FC<CommentProps> = (props) => {
   const [viewAddInput, setViewAddInput] = useState(false);
   const comment = useSelector(selectors.comments.selectCommentById(props.idComment));
   const user = useSelector(selectors.user.selectUser());

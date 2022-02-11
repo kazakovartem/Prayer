@@ -1,14 +1,14 @@
 import { ColumnsState, ColumnState } from './types';
 import { createSelector } from 'reselect';
 
-const getColumns = (state: ColumnsState) => state.columns;
+const select = (state: ColumnsState) => state.columns;
 
 function selectAllColumns() {
-  return createSelector(getColumns, (state) => state);
+  return createSelector(select, (state) => state);
 }
 
 function selectColumnsById(id: number) {
-  return createSelector(getColumns, (state) =>
+  return createSelector(select, (state) =>
     state.find((columns: ColumnState) => columns.id === id),
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { authScreenProp } from '../../types/index';
@@ -9,8 +9,14 @@ import { SwipeRow } from 'react-native-swipe-list-view';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../state/ducks/ducks';
 
-const Prayer = (props: { label: string; idPrayer: number; isChecked: boolean }) => {
-  const navigation = useNavigation<any>();
+type PrayerProps = {
+  label: string;
+  idPrayer: number;
+  isChecked: boolean;
+};
+
+const Prayer: FC<PrayerProps> = (props) => {
+  const navigation = useNavigation<authScreenProp>();
   const dispatch = useDispatch();
   const [viewUpdateInput, setViewUpdateInput] = useState(false);
   const [text, setOnChangeText] = useState(props.label);
@@ -115,12 +121,11 @@ const Prayer = (props: { label: string; idPrayer: number; isChecked: boolean }) 
                       otherParam: 'anything you want here',
                     });
                   }}
+                  style={styles.text}
                 >
-                  <View>
-                    <Text style={props.isChecked ? styles.textChecked : styles.text}>
-                      {props.label}
-                    </Text>
-                  </View>
+                  <Text style={props.isChecked ? {textDecorationLine: 'line-through',} : {}}>
+                    {props.label}
+                  </Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.iconContain}>
@@ -241,6 +246,7 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingLeft: 15,
+    width: '90%',
   },
   textInput: {
     width: '100%',
@@ -248,10 +254,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginRight: 10,
     backgroundColor: '#E5E5E5',
-  },
-  textChecked: {
-    paddingLeft: 15,
-    textDecorationLine: 'line-through',
   },
   newColl: {
     width: '70%',

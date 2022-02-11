@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as actions from './actions';
-import { initialState } from './initialState';
+import { initialState } from './types';
 import { PrayerState } from './types';
 
 const Prayers = createReducer(initialState.prayers, (builder) => {

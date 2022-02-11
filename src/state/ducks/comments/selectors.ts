@@ -1,20 +1,20 @@
 import { CommentsState, CommentState } from './types';
 import { createSelector } from 'reselect';
 
-const getComments = (state: CommentsState) => state.comments;
+const select = (state: CommentsState) => state.comments;
 
 function selectAllComments() {
-  return createSelector(getComments, (state) => state);
+  return createSelector(select, (state) => state);
 }
 
 function selectCommentById(id: number) {
-  return createSelector(getComments, (state) =>
+  return createSelector(select, (state) =>
     state.find((columns: CommentState) => columns.id === id),
   );
 }
 
 function selectCommentsByPrayerId(id: number) {
-  return createSelector(getComments, (state) =>
+  return createSelector(select, (state) =>
     state.filter((columns: CommentState) => columns.prayerId === id),
   );
 }

@@ -1,5 +1,15 @@
 export const ADD_USER = 'ADD_USER';
 
+export const initialState: UserState = {
+  user: {
+    name: '',
+    email: '',
+    token: '',
+    id: 0,
+    logged: false,
+  },
+};
+
 export default {
   ADD_USER,
 };

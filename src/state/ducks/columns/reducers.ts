@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as actions from './actions';
-import { initialState } from './initialState';
+import { initialState } from './types';
 import { ColumnState } from './types';
 
 const Columns = createReducer(initialState.columns, (builder) => {

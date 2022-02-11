@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as actions from './actions';
-import { initialState } from './initialState';
+import { initialState } from './types';
 import { CommentState } from './types';
 
 const Comments = createReducer(initialState.comments, (builder) => {

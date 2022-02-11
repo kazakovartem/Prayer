@@ -6,9 +6,10 @@ export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   Columns: undefined;
-  Prayers: undefined;
+  Prayers: {itemId: number, otherParam: string} | undefined;
+  Prayer: {itemId: number, otherParam: string} | undefined;
 };
-export type authScreenProp = StackNavigationProp<RootStackParamList, 'SignUp' | 'Prayers'>;
+export type authScreenProp = StackNavigationProp<RootStackParamList>;
 
 export type User = {
   name: string;

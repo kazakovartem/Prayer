@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { authScreenProp } from '../../types/index';
@@ -9,8 +9,13 @@ import { actions } from '../../state/ducks/ducks';
 import { selectors } from '../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 
-const Column = (props: { label: string; idColumn: number }) => {
-  const navigation = useNavigation<any>();
+type ColumnProps = {
+  label: string;
+  idColumn: number;
+};
+
+const Column: FC<ColumnProps> = (props) => {
+  const navigation = useNavigation<authScreenProp>();
   const [viewAddInput, setViewAddInput] = useState(false);
   const [text, setOnChangeText] = useState(props.label);
   const dispatch = useDispatch();

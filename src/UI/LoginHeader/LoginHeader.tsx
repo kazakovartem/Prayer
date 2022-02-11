@@ -36,4 +36,3 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 });
-//marginRight: '2%',

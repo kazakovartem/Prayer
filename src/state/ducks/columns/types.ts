@@ -4,6 +4,10 @@ export const DELL_ALL_COLUMNS = 'DELL_ALL_COLUMNS';
 export const DELL_COLUMN_BY_ID = 'DELL_COLUMN_BY_ID';
 export const UPDATE_COLUMN_BY_ID = 'UPDATE_COLUMN_BY_ID';
 
+export const initialState: ColumnsState = {
+  columns: [],
+};
+
 export default {
   ADD_COLUMN,
   ADD_COLUMNS,

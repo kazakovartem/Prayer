@@ -4,6 +4,10 @@ export const DELETE_ALL_COMMENTS = 'DELETE_ALL_COMMENTS';
 export const DELETE_COMMENT_BY_ID = 'DELETE_COMMENT_BY_ID';
 export const UPDATE_COMMENT_BY_ID = 'UPDATE_COMMENT_BY_ID';
 
+export const initialState: CommentsState = {
+  comments: [],
+};
+
 export default {
   ADD_COMMENT,
   ADD_COMMENTS,

@@ -8,15 +8,16 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { authScreenProp } from '../types/index';
-import { Routes } from '../navigation/types';
-import Column from '../components/column';
-import { selectors } from '../state/ducks/ducks';
+import { authScreenProp } from '../../types/index';
+import { Routes } from '../types';
+import Column from '../../components/Column/ColumnScreen';
+import { selectors } from '../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { actions } from '../state/ducks/ducks';
+import { actions } from '../../state/ducks/ducks';
 
 const ColumnsScreen = () => {
   const columns = useSelector(selectors.columns.selectAllColumns());
@@ -26,11 +27,19 @@ const ColumnsScreen = () => {
 
   const handleNewColumn = () => {
     setViewAddInput(false);
-    dispatch(actions.columns.createColumnSaga({ title: addNewColumnText, description: '' }));
+    let complete = false;
+    for (let i = 0;i<addNewColumnText.length ;i++){
+      if(addNewColumnText[i] !== ' '){
+        complete = true;
+      }
+    }
+    if(complete){
+      dispatch(actions.columns.createColumnSaga({ title: addNewColumnText, description: '' }));
+    }
     setAddNewColumnText('');
   };
   return (
-    <>
+    <SafeAreaView>
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.screenTitle}>My Deck</Text>
@@ -40,7 +49,7 @@ const ColumnsScreen = () => {
             }}
           >
             <Image
-              source={require('../assets/image/Union.png')}
+              source={require('../../assets/image/Union.png')}
               style={{ width: 15, height: 15 }}
             />
           </Pressable>
@@ -66,7 +75,7 @@ const ColumnsScreen = () => {
           </View>
         </ScrollView>
       </View>
-    </>
+    </SafeAreaView>
   );
 };
 

@@ -4,6 +4,10 @@ export const DELL_PRAYER_BY_ID = 'DELL_PRAYER_BY_ID';
 export const DELL_ALL_PRAYERS = 'DELL_ALL_PRAYERS';
 export const UPDATE_PRAYER_BY_ID = 'UPDATE_PRAYER_BY_ID';
 
+export const initialState: PrayersState = {
+  prayers: [],
+};
+
 export default {
   ADD_PRAYER,
   ADD_PRAYERS,

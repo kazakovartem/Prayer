@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Routes } from './types';
-import Columns from '../screens/ColumnsScreen';
-import Prayers from '../screens/PrayersScreen';
-import Prayer from '../screens/OnePrayerScreen';
+import Columns from './screens/ColumnsScreen';
+import Prayers from './screens/PrayersScreen';
+import Prayer from './screens/OnePrayerScreen';
 const Stack = createNativeStackNavigator();
 
 const AuthUserNavigation = () => {

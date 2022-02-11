@@ -1,16 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { Routes } from '../navigation/types';
-import { authScreenProp } from '../types/index';
-import { useDispatch } from 'react-redux';
-import { actions } from '../state/ducks/ducks';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
+import { selectors } from '../../state/ducks/ducks';
+import LoginHeader from '../../UI/LoginHeader/LoginHeader';
 import { useForm, Controller } from 'react-hook-form';
-import SignInButton from '../UI/SignButton/SignButton';
-import LoginHeader from '../UI/LoginHeader/LoginHeader';
+import SignInButton from '../../UI/SignButton/SignButton';
+import { useNavigation } from '@react-navigation/native';
+import { Routes } from '../types';
+import { authScreenProp } from '../../types/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { actions } from '../../state/ducks/ducks';
 
-const AuthenticationScreen = () => {
+const RegistrationScreen = () => {
   const navigation = useNavigation<authScreenProp>();
+  const user = useSelector(selectors.user.selectUser());
   const dispatch = useDispatch();
 
   const {
@@ -20,17 +22,19 @@ const AuthenticationScreen = () => {
   } = useForm({
     defaultValues: {
       email: '',
+      name: '',
       password: '',
     },
   });
+
   const onSubmit = (data: any) => {
-    dispatch(actions.user.signIn({ email: data.email, password: data.password }));
+    dispatch(actions.user.signUp({ email: data.email, name: data.name, password: data.password }));
   };
 
   return (
-    <View style={styles.content}>
-      <LoginHeader label={'Sign-in'} />
-      <ScrollView style={styles.bodyContain}>
+    <SafeAreaView>
+      <View style={styles.content}>
+        <LoginHeader label="Sign-Up" />
         <View style={styles.body}>
           <Controller
             control={control}
@@ -39,7 +43,7 @@ const AuthenticationScreen = () => {
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <>
-                <Text style={styles.inputText}>Email</Text>
+                <Text>Email</Text>
                 <TextInput
                   style={styles.input}
                   onBlur={onBlur}
@@ -51,6 +55,27 @@ const AuthenticationScreen = () => {
             name="email"
           />
           {errors.email && <Text style={{ color: 'red' }}>This is required.</Text>}
+
+          <Controller
+            control={control}
+            rules={{
+              minLength: 3,
+              required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <Text style={styles.inputText}>Name</Text>
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </>
+            )}
+            name="name"
+          />
+          {errors.name && <Text style={{ color: 'red' }}>This is very simple.</Text>}
 
           <Controller
             control={control}
@@ -72,31 +97,29 @@ const AuthenticationScreen = () => {
             name="password"
           />
           {errors.password && <Text style={{ color: 'red' }}>This is very simple.</Text>}
+
           <View style={styles.buttonContain}>
-            <SignInButton label={'Sign-in'} onPress={handleSubmit(onSubmit)} />
+            <SignInButton label={'Sign-UP'} onPress={handleSubmit(onSubmit)} />
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate(Routes.SignUp);
+                navigation.navigate(Routes.SignIn);
               }}
             >
-              <Text style={styles.singText}>Sign-up</Text>
+              <Text style={styles.singText}>Sign-in</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 };
 
-export default AuthenticationScreen;
+export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   content: {
     backgroundColor: '#ffffff',
     height: '100%',
-    width: '100%',
-  },
-  bodyContain: {
     width: '100%',
   },
   body: {
@@ -128,7 +151,7 @@ const styles = StyleSheet.create({
   },
   buttonContain: {
     marginTop: 30,
-    width: '70%',
+    width: '74%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
