@@ -105,7 +105,7 @@ const Prayer: FC<PrayerProps> = (props) => {
                     handleCheckPrayer();
                   }}
                 >
-                  <View style={styles.touchCheckBox}>
+                  <View style={viewUpdateInput ? { display: 'none' } : styles.touchCheckBox}>
                     <Image
                       style={props.isChecked ? {} : { display: 'none' }}
                       source={require('../../assets/image/Check.png')}
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
   },
   newColl: {
     width: '70%',
-    height: 59,
+    height: '100%',
     borderRadius: 4,
     display: 'flex',
     flexDirection: 'row',
