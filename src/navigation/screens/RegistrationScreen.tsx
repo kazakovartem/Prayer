@@ -1,5 +1,13 @@
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  ActivityIndicator,
+} from 'react-native';
 import { selectors } from '../../state/ducks/ducks';
 import LoginHeader from '../../UI/LoginHeader/LoginHeader';
 import { useForm, Controller } from 'react-hook-form';
@@ -13,7 +21,15 @@ import { actions } from '../../state/ducks/ducks';
 const RegistrationScreen = () => {
   const navigation = useNavigation<authScreenProp>();
   const user = useSelector(selectors.user.selectUser());
+  const [expectationUser, setExpectationUser] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user.message) {
+      console.log('err: ', user.message);
+      setExpectationUser(false);
+    }
+  }, [user.message]);
 
   const {
     control,
@@ -28,7 +44,9 @@ const RegistrationScreen = () => {
   });
 
   const onSubmit = (data: any) => {
+    dispatch(actions.user.deleteMessage({ message: null }));
     dispatch(actions.user.signUp({ email: data.email, name: data.name, password: data.password }));
+    setExpectationUser(true);
   };
 
   return (
@@ -98,16 +116,23 @@ const RegistrationScreen = () => {
           />
           {errors.password && <Text style={{ color: 'red' }}>This is very simple.</Text>}
 
-          <View style={styles.buttonContain}>
+          <ActivityIndicator
+            size="large"
+            style={expectationUser ? { marginTop: 32 } : { display: 'none' }}
+          />
+
+          <View style={expectationUser ? {display:'none'} : styles.buttonContain}>
             <SignInButton label={'Sign-UP'} onPress={handleSubmit(onSubmit)} />
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate(Routes.SignIn);
+                dispatch(actions.user.deleteMessage({ message: null }));
               }}
             >
               <Text style={styles.singText}>Sign-in</Text>
             </TouchableOpacity>
           </View>
+          <Text style={user.message ? styles.inputText : { display: 'none' }}>{user.message}</Text>
         </View>
       </View>
     </SafeAreaView>

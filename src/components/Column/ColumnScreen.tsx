@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
   text: {
     paddingLeft: 15,
     paddingTop: 20,
+    fontFamily: 'SFUIText-Medium',
   },
   textInput: {
     width: 300,

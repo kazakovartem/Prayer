@@ -3,11 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  Button,
-  Pressable,
-  ScrollView,
-  TextInput,
 } from 'react-native';
 
 const LoginHeader = (props: { label: string }) => {
@@ -30,7 +25,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   screenTitle: {
-    fontFamily: 'SFUIDisplay-Thin',
+    fontFamily: 'SFUIDisplay-Medium',
     marginVertical: 22,
     fontSize: 17,
     lineHeight: 20,

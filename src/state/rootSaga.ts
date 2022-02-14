@@ -5,6 +5,7 @@ export default function* rootSaga() {
   yield all([
     sagaWatchers.user.watchSignIn(),
     sagaWatchers.user.watchSignUp(),
+    sagaWatchers.user.watchDellUserMessage(),
     sagaWatchers.columns.watchAddColumns(),
     sagaWatchers.columns.watchAddColumn(),
     sagaWatchers.columns.watchUpdateColumn(),

@@ -1,4 +1,5 @@
 export const ADD_USER = 'ADD_USER';
+export const ERROR_USER = 'ERROR_USER';
 
 export const initialState: UserState = {
   user: {
@@ -7,16 +8,19 @@ export const initialState: UserState = {
     token: '',
     id: 0,
     logged: false,
+    message: null
   },
 };
 
 export default {
   ADD_USER,
+  ERROR_USER,
 };
 
 export const sagasTypeUser = {
   SIGN_IN: 'SIGN_IN',
   SIGN_UP: 'SIGN_UP',
+  DELL_MESSAGE: 'DELL_MESSAGE',
 };
 
 export interface IAddUser {
@@ -25,6 +29,10 @@ export interface IAddUser {
   token: string;
   id: number;
   logged: boolean;
+}
+
+export interface IErrorUser {
+  message: string | null;
 }
 
 export interface IUserSignUp {
@@ -45,6 +53,7 @@ export type UserState = {
     token: string;
     id: number;
     logged: boolean;
+    message: null | string;
   };
 };
 
@@ -54,5 +63,12 @@ export interface IAddUserInState {
     password: string;
     email: string;
     name: string;
+  };
+}
+
+export interface IErrorUserSaga {
+  type: string;
+  payload: {
+    message: string | null;
   };
 }

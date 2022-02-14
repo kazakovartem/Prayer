@@ -51,7 +51,6 @@ const Prayer: FC<PrayerProps> = (props) => {
   };
 
   const handleCheckPrayer = () => {
-    console.log('check');
     let idLocal = 0;
     let titleLocal = '';
     let descriptionLocal = '';

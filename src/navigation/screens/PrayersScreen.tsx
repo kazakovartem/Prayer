@@ -41,12 +41,12 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
   const handleAddPrayer = () => {
     if (text !== '') {
       let complete = false;
-      for (let i = 0;i<text.length ;i++){
-        if(text[i] !== ' '){
+      for (let i = 0; i < text.length; i++) {
+        if (text[i] !== ' ') {
           complete = true;
         }
       }
-      if(complete){
+      if (complete) {
         dispatch(actions.prayers.createPrayer({ id: itemId, title: text, description: '' }));
       }
       setOnChangeText('');
@@ -185,13 +185,23 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
                 );
               })}
               <View
-                style={checkedPrayers ? styles.hideCheckTextContain : styles.showCheckTextContain}
+                style={
+                  prayersCheckedIsAssign
+                    ? checkedPrayers
+                      ? styles.hideCheckTextContain
+                      : styles.showCheckTextContain
+                    : { display: 'none' }
+                }
               >
                 <TouchableOpacity
                   onPress={() => {
                     handleViewCheck();
                   }}
-                  style={prayersCheckedIsAssign ? styles.hideCheckText : { display: 'none' }}
+                  style={
+                    prayersCheckedIsAssign
+                      ? styles.hideCheckText
+                      : { display: 'none', borderColor: '#FFF' }
+                  }
                 >
                   <Text style={{ color: '#FFF', fontSize: 14, textTransform: 'uppercase' }}>
                     {HideCheckText}
@@ -213,44 +223,51 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
             </View>
           </ScrollView>
         </View>
-        <View style={subPrayers ? {} : { display: 'none' }}>
+        <View style={subPrayers ? styles.body : { display: 'none' }}>
           <ScrollView>
-            {prayersNotChecked.map((prayer) => {
-              return (
-                <Prayer
-                  label={prayer.title}
-                  idPrayer={prayer.id}
-                  key={prayer.id}
-                  isChecked={false}
-                />
-              );
-            })}
-            <View
-              style={
-                prayersCheckedIsAssign
-                  ? checkedPrayers
-                    ? styles.hideCheckTextContain
-                    : styles.showCheckTextContain
-                  : { display: 'none' }
-              }
-            >
-              <TouchableOpacity
-                onPress={() => {
-                  handleViewCheck();
-                }}
-                style={styles.hideCheckText}
-              >
-                <Text style={{ color: '#FFF', fontSize: 14, textTransform: 'uppercase' }}>
-                  {HideCheckText}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={checkedPrayers ? styles.checkPrayers : { display: 'none' }}>
-              {prayersChecked.map((prayer, index) => {
+            <View style={styles.bodyScroll}>
+              {prayersNotChecked.map((prayer) => {
                 return (
-                  <Prayer label={prayer.title} idPrayer={prayer.id} key={index} isChecked={true} />
+                  <Prayer
+                    label={prayer.title}
+                    idPrayer={prayer.id}
+                    key={prayer.id}
+                    isChecked={false}
+                  />
                 );
               })}
+              <View
+                style={
+                  prayersCheckedIsAssign
+                    ? checkedPrayers
+                      ? styles.hideCheckTextContain
+                      : styles.showCheckTextContain
+                    : { display: 'none' }
+                }
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    handleViewCheck();
+                  }}
+                  style={styles.hideCheckText}
+                >
+                  <Text style={{ color: '#FFF', fontSize: 14, textTransform: 'uppercase' }}>
+                    {HideCheckText}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={checkedPrayers ? styles.checkPrayers : { display: 'none' }}>
+                {prayersChecked.map((prayer, index) => {
+                  return (
+                    <Prayer
+                      label={prayer.title}
+                      idPrayer={prayer.id}
+                      key={index}
+                      isChecked={true}
+                    />
+                  );
+                })}
+              </View>
             </View>
           </ScrollView>
         </View>
@@ -278,7 +295,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   screenTitle: {
-    fontFamily: 'SFUIDisplay-Thin',
+    fontFamily: 'SFUIText-Medium',
     marginVertical: 22,
     fontSize: 17,
   },

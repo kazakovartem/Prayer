@@ -55,7 +55,6 @@ export function* addPrayerInState({ payload }: IAddPrayerInState) {
 
 export function* updatePrayerInState({ payload }: IUpdatePrayerInState) {
   try {
-    console.log(payload);
     const { data } = yield call(
       routsDirect.prayers.updatePrayer,
       payload.id,

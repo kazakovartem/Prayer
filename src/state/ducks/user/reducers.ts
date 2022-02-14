@@ -9,6 +9,24 @@ const User = createReducer(initialState.user, (builder) => {
     state.logged = true;
     state.token = action.payload.token;
     state.id = action.payload.id;
+    state.message = null;
+    return state;
+  })
+  .addCase(actions.default.errorUser, (state, action) => {
+    if (action.payload.message){
+      let message = '';
+      for (let i = 0;i<action.payload.message.length ;i++){
+        if(action.payload.message[i] !== ':'){
+          message = message + action.payload.message[i];
+        } else {
+          break;
+        }
+      }
+      state.message = message;
+    } else {
+      state.message = action.payload.message;
+    }
+    
     return state;
   });
 });
