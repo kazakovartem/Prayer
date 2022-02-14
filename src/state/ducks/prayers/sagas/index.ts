@@ -2,7 +2,8 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { sagasTypePrayers } from '../types';
 import types from '../types';
 import { routsDirect } from '../../../../api/routsDirect';
-import { IAddPrayerInState, IUpdatePrayerInState, IDeletePrayerInState } from '../types';
+import { IAddPrayerInState, IUpdatePrayerInState, IDeletePrayerInState, IUpdatePrayerCommentsInState } from '../types';
+import { sagasTypeComments } from '../../comments/types';
 
 export function* addAllPrayersInState() {
   try {
@@ -76,6 +77,20 @@ export function* updatePrayerInState({ payload }: IUpdatePrayerInState) {
   }
 }
 
+export function* updatePrayerCommentsInState({ payload }: IUpdatePrayerCommentsInState) {
+  try {
+    yield put({
+      type: types.UPDATE_PRAYER_BY_ID,
+      payload: {
+        id: payload.id,
+        commentsIds : payload.commentsIds,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function* deletePrayerInState({ payload }: IDeletePrayerInState) {
   try {
     yield put({
@@ -84,6 +99,16 @@ export function* deletePrayerInState({ payload }: IDeletePrayerInState) {
         id: payload.id,
       },
     });
+    for(let i = 0; i< payload.commentsIds.length;i++){
+      yield put({
+      type: sagasTypeComments.DELETE_COMMENT,
+      payload: {
+        id: payload.commentsIds[i],
+      },
+    });
+    }
+    
+
     yield call(routsDirect.prayers.deletePrayer, payload.id);
   } catch (error) {
     console.log(error);
@@ -102,6 +127,10 @@ export function* watchUpdatePrayer() {
   yield takeLatest(sagasTypePrayers.UPDATE_PRAYER_SAGA, updatePrayerInState);
 }
 
+export function* watchUpdatePrayerComments() {
+  yield takeLatest(sagasTypePrayers.UPDATE_PRAYER_COMMENTS_SAGA, updatePrayerCommentsInState);
+}
+
 export function* watchDeletePrayers() {
   yield takeLatest(sagasTypePrayers.DELETE_PRAYER_SAGA, deletePrayerInState);
 }
@@ -110,5 +139,6 @@ export default {
   watchAddALLPrayers,
   watchAddPrayers,
   watchUpdatePrayer,
+  watchUpdatePrayerComments,
   watchDeletePrayers,
 };

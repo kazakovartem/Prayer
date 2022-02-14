@@ -14,6 +14,7 @@ export default function* rootSaga() {
     sagaWatchers.prayers.watchAddPrayers(),
     sagaWatchers.prayers.watchDeletePrayers(),
     sagaWatchers.prayers.watchUpdatePrayer(),
+    sagaWatchers.prayers.watchUpdatePrayerComments(),
     sagaWatchers.comments.watchAddComments(),
     sagaWatchers.comments.watchAddComment(),
     sagaWatchers.comments.watchDeleteComment(),

@@ -3,6 +3,7 @@ import { sagasTypeComments } from '../types';
 import types from '../types';
 import { routsDirect } from '../../../../api/routsDirect';
 import { IAddCommentInState, IDeleteCommentInState, IUpdateCommentInState } from '../types';
+import { sagasTypePrayers } from '../../prayers/types';
 
 export function* addCommentsInState() {
   try {
@@ -38,6 +39,13 @@ export function* addCommentInState({ payload }: IAddCommentInState) {
         body: data.body,
         created: data.created,
         prayerId: data.prayerId,
+      },
+    });
+    yield put({
+      type: sagasTypePrayers.UPDATE_PRAYER_COMMENTS_SAGA,
+      payload: {
+        id: data.prayerId,
+        commentsIds : data.id,
       },
     });
   } catch (error) {

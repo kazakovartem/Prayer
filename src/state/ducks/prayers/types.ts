@@ -20,6 +20,7 @@ export const sagasTypePrayers = {
   GET_PRAYERS: 'GET_PRAYERS',
   CREATE_PRAYER: 'CREATE_PRAYER',
   UPDATE_PRAYER_SAGA: 'UPDATE_PRAYER_SAGA',
+  UPDATE_PRAYER_COMMENTS_SAGA: 'UPDATE_PRAYER_COMMENTS_SAGA',
   DELETE_PRAYER_SAGA: 'DELETE_PRAYER_SAGA',
 };
 
@@ -45,6 +46,7 @@ export interface IAddPrayers {
 
 export interface IDellPrayerById {
   id: number;
+  idComments: number[]
 }
 
 export interface IDellAllPrayers {}
@@ -54,6 +56,7 @@ export interface IUpdatePrayerById {
   title: string;
   description: string | null;
   checked: boolean;
+  commentsIds: number | null;
 }
 
 export interface ICreatePrayer {
@@ -105,5 +108,14 @@ export interface IDeletePrayerInState {
   type: string;
   payload: {
     id: number;
+    commentsIds: number[]
+  };
+}
+
+export interface IUpdatePrayerCommentsInState {
+  type: string;
+  payload: {
+    id: number;
+    commentsIds: number;
   };
 }

@@ -23,7 +23,11 @@ const Prayer: FC<PrayerProps> = (props) => {
   const prayer = useSelector(selectors.prayers.selectPrayerById(props.idPrayer));
 
   const handleDeletePrayer = () => {
-    dispatch(actions.prayers.deletePrayerSaga({ id: props.idPrayer }));
+    let idComments: number[] = [];
+    if(prayer?.commentsIds){
+      idComments = prayer?.commentsIds
+    }
+    dispatch(actions.prayers.deletePrayerSaga({ id: props.idPrayer, idComments: idComments}));
   };
 
   const handleUpdatePrayer = () => {
@@ -42,6 +46,7 @@ const Prayer: FC<PrayerProps> = (props) => {
             title: text,
             description: descriptionLocal,
             checked: props.isChecked,
+            commentsIds: null,
           }),
         );
       }
@@ -64,6 +69,7 @@ const Prayer: FC<PrayerProps> = (props) => {
         title: titleLocal,
         description: descriptionLocal,
         checked: !props.isChecked,
+        commentsIds: null,
       }),
     );
   };

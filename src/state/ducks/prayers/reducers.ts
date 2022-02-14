@@ -24,9 +24,13 @@ const Prayers = createReducer(initialState.prayers, (builder) => {
     .addCase(actions.default.updatePrayerById, (state, action) => {
       const change = state.find((prayer) => prayer.id === action.payload.id);
       if (change) {
-        change.description = action.payload.description;
-        change.title = action.payload.title;
-        change.checked = action.payload.checked;
+        if(action.payload.commentsIds){
+          change.commentsIds?.push(action.payload.commentsIds)
+        } else {
+          change.description = action.payload.description;
+          change.title = action.payload.title;
+          change.checked = action.payload.checked;
+        }
       }
       return state;
     });

@@ -103,7 +103,7 @@ const Comment: FC<CommentProps> = (props) => {
           <View style={viewAddInput ? { display: 'none' } : styles.touch}>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
               <Image
-                source={image[props.count]}
+                source={image[countImage]}
                 style={{ marginLeft: 14, marginTop: 14, borderRadius: 20, width: 46, height: 46 }}
               />
               <View style={{ display: 'flex', flexDirection: 'column', height: 50, marginLeft: 9 }}>

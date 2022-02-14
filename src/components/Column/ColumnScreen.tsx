@@ -18,6 +18,7 @@ const Column: FC<ColumnProps> = (props) => {
   const navigation = useNavigation<authScreenProp>();
   const [viewAddInput, setViewAddInput] = useState(false);
   const [text, setOnChangeText] = useState(props.label);
+  const prayers = useSelector(selectors.prayers.selectPrayersByColumnId(props.idColumn));
   const dispatch = useDispatch();
 
   const handleChange = () => {
@@ -35,9 +36,15 @@ const Column: FC<ColumnProps> = (props) => {
   };
 
   const handleDelete = () => {
-    console.log('Delete');
-    console.log('id items:', props.idColumn);
     dispatch(actions.columns.deleteColumnSaga({ id: props.idColumn }));
+    prayers.map((prayer) => {
+      let ids:number[] = [];
+      if(prayer.commentsIds){
+        ids = prayer.commentsIds;
+      }
+      dispatch(actions.prayers.deletePrayerSaga({ id: prayer.id, idComments: ids}));
+    })
+    
   };
 
   return (
