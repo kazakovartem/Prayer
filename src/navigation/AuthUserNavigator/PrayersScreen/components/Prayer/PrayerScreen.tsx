@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { authScreenProp } from '../../../../../types/index';
 import { Routes } from '../../../../../navigation/types';
@@ -8,6 +8,9 @@ import { selectors } from '../../../../../state/ducks/ducks';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../../../state/ducks/ducks';
+import InputChangeInComponent from '../../../../../UI/InputChangeInComponent';
+import DeleteTouchable from '../../../../../UI/DeleteTouchable';
+import ChangeTouchable from '../../../../../UI/ChangeTouchable';
 
 type PrayerProps = {
   label: string;
@@ -24,10 +27,10 @@ const Prayer: FC<PrayerProps> = (props) => {
 
   const handleDeletePrayer = () => {
     let idComments: number[] = [];
-    if(prayer?.commentsIds){
-      idComments = prayer?.commentsIds
+    if (prayer?.commentsIds) {
+      idComments = prayer?.commentsIds;
     }
-    dispatch(actions.prayers.deletePrayerSaga({ id: props.idPrayer, idComments: idComments}));
+    dispatch(actions.prayers.deletePrayerSaga({ id: props.idPrayer, idComments: idComments }));
   };
 
   const handleUpdatePrayer = () => {
@@ -56,11 +59,9 @@ const Prayer: FC<PrayerProps> = (props) => {
   };
 
   const handleCheckPrayer = () => {
-    let idLocal = 0;
     let titleLocal = '';
     let descriptionLocal = '';
     if (prayer?.id) {
-      idLocal = prayer?.id;
       titleLocal = prayer?.title;
     }
     dispatch(
@@ -79,22 +80,18 @@ const Prayer: FC<PrayerProps> = (props) => {
       <SwipeRow leftOpenValue={65} rightOpenValue={-65}>
         <View style={styles.hiddenContainer}>
           <View style={styles.hiddenContainerContent}>
-            <TouchableOpacity
-              style={styles.touchLeft}
-              onPress={() => {
+            <ChangeTouchable
+              onChange={() => {
                 handleUpdatePrayer();
               }}
-            >
-              <Text style={styles.hiddenTextLeft}>Change</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.touchRight}
-              onPress={() => {
+              containerStyle={styles.touchLeft}
+            />
+            <DeleteTouchable
+              onDelete={() => {
                 handleDeletePrayer();
               }}
-            >
-              <Text style={styles.hiddenTextRight}>Delete</Text>
-            </TouchableOpacity>
+              containerStyle={styles.touchRight}
+            />
           </View>
         </View>
         <View style={styles.container}>
@@ -103,7 +100,11 @@ const Prayer: FC<PrayerProps> = (props) => {
               <View style={styles.colorLine}></View>
 
               <View style={viewUpdateInput ? styles.newColl : { display: 'none' }}>
-                <TextInput style={styles.textInput} value={text} onChangeText={setOnChangeText} />
+                <InputChangeInComponent
+                  value={text}
+                  onChangeText={setOnChangeText}
+                  containerStyle={styles.textInput}
+                />
               </View>
               <View style={viewUpdateInput ? { display: 'none' } : styles.touch}>
                 <TouchableOpacity
@@ -128,7 +129,7 @@ const Prayer: FC<PrayerProps> = (props) => {
                   }}
                   style={styles.text}
                 >
-                  <Text style={props.isChecked ? {textDecorationLine: 'line-through',} : {}}>
+                  <Text style={props.isChecked ? { textDecorationLine: 'line-through' } : {}}>
                     {props.label}
                   </Text>
                 </TouchableOpacity>
@@ -206,14 +207,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#FF1',
     alignItems: 'center',
-  },
-  hiddenTextLeft: {
-    marginLeft: 10,
-    color: '#FFF',
-  },
-  hiddenTextRight: {
-    marginRight: 10,
-    color: '#FFF',
   },
   touch: {
     height: '100%',

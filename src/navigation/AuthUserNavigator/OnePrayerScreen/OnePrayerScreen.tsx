@@ -38,12 +38,12 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
   const handleAddComment = () => {
     if (text !== '') {
       let complete = false;
-      for (let i = 0;i<text.length ;i++){
-        if(text[i] !== ' '){
+      for (let i = 0; i < text.length; i++) {
+        if (text[i] !== ' ') {
           complete = true;
         }
       }
-      if(complete){
+      if (complete) {
         dispatch(actions.comments.createCommentSaga({ id: idPrayer, body: text }));
       }
 
@@ -82,7 +82,7 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
           </View>
         </View>
         <View style={styles.body}>
-          <ScrollView  style={{height: '72%'}}>
+          <ScrollView style={{ height: '72%' }}>
             <View style={styles.bodyScroll}>
               <View style={styles.timeLine}>
                 <View style={styles.colorLine}></View>

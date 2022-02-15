@@ -6,7 +6,7 @@ type SignButtonProps = {
   onPress(): void;
 };
 
-const SignButton: React.FC<SignButtonProps> = ({ label,onPress}) => {
+const SignButton: React.FC<SignButtonProps> = ({ label, onPress }) => {
   return (
     <View style={styles.buttonWrapper}>
       <TouchableOpacity

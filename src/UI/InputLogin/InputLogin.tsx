@@ -14,21 +14,11 @@ type LoginInputProps = {
   value: string;
 };
 
-const LoginInput: React.FC<LoginInputProps> = ({
-  label,
-  onBlur,
-  onChangeText,
-  value,
-}) => {
+const LoginInput: React.FC<LoginInputProps> = ({ label, onBlur, onChangeText, value }) => {
   return (
     <>
       <Text style={styles.inputText}>{label}</Text>
-      <TextInput
-        style={styles.input}
-        onBlur={onBlur}
-        onChangeText={onChangeText}
-        value={value}
-      />
+      <TextInput style={styles.input} onBlur={onBlur} onChangeText={onChangeText} value={value} />
     </>
   );
 };

@@ -14,6 +14,7 @@ import { selectors } from '../../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../state/ducks/ducks';
+import ShowCheckedPrayer from '../../../UI/ShowCheckedPrayer';
 
 interface IColumnsScreen {
   route: {
@@ -193,20 +194,17 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
                     : { display: 'none' }
                 }
               >
-                <TouchableOpacity
-                  onPress={() => {
+                <ShowCheckedPrayer
+                  label={HideCheckText}
+                  onViewText={() => {
                     handleViewCheck();
                   }}
-                  style={
+                  containerStyle={
                     prayersCheckedIsAssign
                       ? styles.hideCheckText
                       : { display: 'none', borderColor: '#FFF' }
                   }
-                >
-                  <Text style={{ color: '#FFF', fontSize: 14, textTransform: 'uppercase' }}>
-                    {HideCheckText}
-                  </Text>
-                </TouchableOpacity>
+                />
               </View>
               <View style={checkedPrayers ? styles.checkPrayers : { display: 'none' }}>
                 {prayersChecked.map((prayer, index) => {
@@ -245,16 +243,17 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
                     : { display: 'none' }
                 }
               >
-                <TouchableOpacity
-                  onPress={() => {
+                <ShowCheckedPrayer
+                  label={HideCheckText}
+                  onViewText={() => {
                     handleViewCheck();
                   }}
-                  style={styles.hideCheckText}
-                >
-                  <Text style={{ color: '#FFF', fontSize: 14, textTransform: 'uppercase' }}>
-                    {HideCheckText}
-                  </Text>
-                </TouchableOpacity>
+                  containerStyle={
+                    prayersCheckedIsAssign
+                      ? styles.hideCheckText
+                      : { display: 'none', borderColor: '#FFF' }
+                  }
+                />
               </View>
               <View style={checkedPrayers ? styles.checkPrayers : { display: 'none' }}>
                 {prayersChecked.map((prayer, index) => {

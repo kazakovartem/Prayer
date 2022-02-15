@@ -87,12 +87,7 @@ const RegistrationScreen = () => {
               required: true,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
-              <InputLogin
-                label="Password"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-              />
+              <InputLogin label="Password" onBlur={onBlur} onChangeText={onChange} value={value} />
             )}
             name="password"
           />

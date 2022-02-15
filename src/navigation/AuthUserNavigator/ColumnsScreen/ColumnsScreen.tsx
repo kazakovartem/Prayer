@@ -15,6 +15,7 @@ import { selectors } from '../../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../state/ducks/ducks';
+import InputChangeInComponent from '../../../UI/InputChangeInComponent';
 
 const ColumnsScreen = () => {
   const columns = useSelector(selectors.columns.selectAllColumns());
@@ -25,12 +26,12 @@ const ColumnsScreen = () => {
   const handleNewColumn = () => {
     setViewAddInput(false);
     let complete = false;
-    for (let i = 0;i<addNewColumnText.length ;i++){
-      if(addNewColumnText[i] !== ' '){
+    for (let i = 0; i < addNewColumnText.length; i++) {
+      if (addNewColumnText[i] !== ' ') {
         complete = true;
       }
     }
-    if(complete){
+    if (complete) {
       dispatch(actions.columns.createColumnSaga({ title: addNewColumnText, description: '' }));
     }
     setAddNewColumnText('');
@@ -56,10 +57,10 @@ const ColumnsScreen = () => {
             return <Column label={column.title} idColumn={column.id} key={column.id} />;
           })}
           <View style={viewAddInput ? styles.newColl : { display: 'none' }}>
-            <TextInput
-              style={styles.textInput}
+            <InputChangeInComponent
               value={addNewColumnText}
               onChangeText={setAddNewColumnText}
+              containerStyle={styles.textInput}
             />
 
             <TouchableOpacity

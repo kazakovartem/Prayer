@@ -8,6 +8,9 @@ import { useDispatch } from 'react-redux';
 import { actions } from '../../../../../state/ducks/ducks';
 import { selectors } from '../../../../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
+import InputChangeInComponent from '../../../../../UI/InputChangeInComponent';
+import DeleteTouchable from '../../../../../UI/DeleteTouchable';
+import ChangeTouchable from '../../../../../UI/ChangeTouchable';
 
 type ColumnProps = {
   label: string;
@@ -22,8 +25,6 @@ const Column: FC<ColumnProps> = (props) => {
   const dispatch = useDispatch();
 
   const handleChange = () => {
-    console.log('Change');
-
     if (!viewAddInput) {
       setViewAddInput(true);
     } else {
@@ -38,38 +39,37 @@ const Column: FC<ColumnProps> = (props) => {
   const handleDelete = () => {
     dispatch(actions.columns.deleteColumnSaga({ id: props.idColumn }));
     prayers.map((prayer) => {
-      let ids:number[] = [];
-      if(prayer.commentsIds){
+      let ids: number[] = [];
+      if (prayer.commentsIds) {
         ids = prayer.commentsIds;
       }
-      dispatch(actions.prayers.deletePrayerSaga({ id: prayer.id, idComments: ids}));
-    })
-    
+      dispatch(actions.prayers.deletePrayerSaga({ id: prayer.id, idComments: ids }));
+    });
   };
 
   return (
     <SwipeRow leftOpenValue={70} rightOpenValue={-70} style={styles.body}>
       <View style={styles.hiddenContainer}>
-        <TouchableOpacity
-          style={styles.touchLeft}
-          onPress={() => {
+        <ChangeTouchable
+          onChange={() => {
             handleChange();
           }}
-        >
-          <Text style={styles.hiddenTextLeft}>Change</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.touchRight}
-          onPress={() => {
+          containerStyle={styles.touchLeft}
+        />
+        <DeleteTouchable
+          onDelete={() => {
             handleDelete();
           }}
-        >
-          <Text style={styles.hiddenTextRight}>Delete</Text>
-        </TouchableOpacity>
+          containerStyle={styles.touchRight}
+        />
       </View>
       <View style={styles.container}>
         <View style={viewAddInput ? styles.newColl : { display: 'none' }}>
-          <TextInput style={styles.textInput} value={text} onChangeText={setOnChangeText} />
+          <InputChangeInComponent
+            value={text}
+            onChangeText={setOnChangeText}
+            containerStyle={styles.textInput}
+          />
         </View>
         <TouchableOpacity
           style={viewAddInput ? { display: 'none' } : styles.touch}

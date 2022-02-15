@@ -1,13 +1,13 @@
-import React, { useState, useEffect, FC } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { authScreenProp } from '../../../../../types/index';
-import { Routes } from '../../../../../navigation/types';
+import React, { useState, FC } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../../../state/ducks/ducks';
 import { selectors } from '../../../../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
+import InputChangeInComponent from '../../../../../UI/InputChangeInComponent';
+import DeleteTouchable from '../../../../../UI/DeleteTouchable';
+import ChangeTouchable from '../../../../../UI/ChangeTouchable';
 
 type CommentProps = {
   idComment: number;
@@ -62,23 +62,18 @@ const Comment: FC<CommentProps> = (props) => {
     <SwipeRow leftOpenValue={70} rightOpenValue={-70} style={styles.body}>
       <View style={styles.hiddenContainer}>
         <View style={styles.hiddenContainerContent}>
-          <TouchableOpacity
-            style={styles.touchLeft}
-            onPress={() => {
+          <ChangeTouchable
+            onChange={() => {
               handleChange();
             }}
-          >
-            <Text style={styles.hiddenTextLeft}>Change</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.touchRight}
-            onPress={() => {
+            containerStyle={styles.touchLeft}
+          />
+          <DeleteTouchable
+            onDelete={() => {
               handleDeleteComment();
             }}
-          >
-            <Text style={styles.hiddenTextRight}>Delete</Text>
-          </TouchableOpacity>
+            containerStyle={styles.touchRight}
+          />
         </View>
       </View>
       <View style={styles.container}>
@@ -93,10 +88,10 @@ const Comment: FC<CommentProps> = (props) => {
                 <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
                 <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
               </View>
-              <TextInput
-                style={styles.textInput}
+              <InputChangeInComponent
                 value={textInputUpdate}
                 onChangeText={setOnChangeTextInputUpdate}
+                containerStyle={styles.textInput}
               />
             </View>
           </View>
