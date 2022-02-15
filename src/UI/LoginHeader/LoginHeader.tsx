@@ -5,10 +5,14 @@ import {
   View,
 } from 'react-native';
 
-const LoginHeader = (props: { label: string }) => {
+type LoginHeaderProps = {
+  label: string;
+};
+
+const LoginHeader: React.FC<LoginHeaderProps> = ({ label }) => {
   return (
     <View style={styles.header}>
-      <Text style={styles.screenTitle}>{props.label}</Text>
+      <Text style={styles.screenTitle}>{label}</Text>
     </View>
   );
 };

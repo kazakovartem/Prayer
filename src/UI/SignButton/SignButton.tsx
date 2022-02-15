@@ -1,16 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-const SignButton = (props: { label: string; onPress(): void }) => {
+type SignButtonProps = {
+  label: string;
+  onPress(): void;
+};
+
+const SignButton: React.FC<SignButtonProps> = ({ label,onPress}) => {
   return (
     <View style={styles.buttonWrapper}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          props.onPress();
+          onPress();
         }}
       >
-        <Text style={styles.label}>{props.label}</Text>
+        <Text style={styles.label}>{label}</Text>
       </TouchableOpacity>
     </View>
   );

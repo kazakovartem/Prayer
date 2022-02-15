@@ -9,14 +9,15 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { selectors } from '../../../state/ducks/ducks';
-import LoginHeader from '../../../UI/LoginHeader/LoginHeader';
+import LoginHeader from '../../../UI/LoginHeader';
 import { useForm, Controller } from 'react-hook-form';
-import SignInButton from '../../../UI/SignButton/SignButton';
+import SignInButton from '../../../UI/SignButton';
 import { useNavigation } from '@react-navigation/native';
 import { Routes } from '../../types';
 import { authScreenProp } from '../../../types/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../../state/ducks/ducks';
+import InputLogin from '../../../UI/InputLogin';
 
 const RegistrationScreen = () => {
   const navigation = useNavigation<authScreenProp>();
@@ -60,15 +61,7 @@ const RegistrationScreen = () => {
               required: true,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
-              <>
-                <Text>Email</Text>
-                <TextInput
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </>
+              <InputLogin label="Email" onBlur={onBlur} onChangeText={onChange} value={value} />
             )}
             name="email"
           />
@@ -81,15 +74,7 @@ const RegistrationScreen = () => {
               required: true,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
-              <>
-                <Text style={styles.inputText}>Name</Text>
-                <TextInput
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </>
+              <InputLogin label="Name" onBlur={onBlur} onChangeText={onChange} value={value} />
             )}
             name="name"
           />
@@ -102,15 +87,12 @@ const RegistrationScreen = () => {
               required: true,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
-              <>
-                <Text style={styles.inputText}>Password</Text>
-                <TextInput
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </>
+              <InputLogin
+                label="Password"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
             )}
             name="password"
           />
@@ -121,7 +103,7 @@ const RegistrationScreen = () => {
             style={expectationUser ? { marginTop: 32 } : { display: 'none' }}
           />
 
-          <View style={expectationUser ? {display:'none'} : styles.buttonContain}>
+          <View style={expectationUser ? { display: 'none' } : styles.buttonContain}>
             <SignInButton label={'Sign-UP'} onPress={handleSubmit(onSubmit)} />
             <TouchableOpacity
               onPress={() => {
@@ -157,17 +139,6 @@ const styles = StyleSheet.create({
   },
   inputText: {
     marginTop: 23,
-  },
-  input: {
-    borderColor: 'black',
-    marginTop: 12,
-    width: '76%',
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 12,
-    marginBottom: 10,
-    paddingLeft: 10,
-    fontSize: 16,
   },
   singText: {
     fontSize: 14,

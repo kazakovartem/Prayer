@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  TextInput,
   SafeAreaView,
   ActivityIndicator,
 } from 'react-native';
@@ -15,9 +14,10 @@ import { authScreenProp } from '../../../types/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../../state/ducks/ducks';
 import { useForm, Controller } from 'react-hook-form';
-import SignInButton from '../../../UI/SignButton/SignButton';
-import LoginHeader from '../../../UI/LoginHeader/LoginHeader';
+import SignInButton from '../../../UI/SignButton';
+import LoginHeader from '../../../UI/LoginHeader';
 import { selectors } from '../../../state/ducks/ducks';
+import InputLogin from '../../../UI/InputLogin';
 
 const AuthorizationsScreen = () => {
   const navigation = useNavigation<authScreenProp>();
@@ -60,15 +60,7 @@ const AuthorizationsScreen = () => {
                 required: true,
               }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <>
-                  <Text style={styles.inputText}>Email</Text>
-                  <TextInput
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                </>
+                <InputLogin label="Email" onBlur={onBlur} onChangeText={onChange} value={value} />
               )}
               name="email"
             />
@@ -81,20 +73,20 @@ const AuthorizationsScreen = () => {
                 required: true,
               }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <>
-                  <Text style={styles.inputText}>Password</Text>
-                  <TextInput
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                </>
+                <InputLogin
+                  label="Password"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
               )}
               name="password"
             />
             {errors.password && <Text style={{ color: 'red' }}>This is very simple.</Text>}
-            <ActivityIndicator size="large" style={expectationUser ? {marginTop: 32} : { display: 'none' }} />
+            <ActivityIndicator
+              size="large"
+              style={expectationUser ? { marginTop: 32 } : { display: 'none' }}
+            />
             <View style={expectationUser ? { display: 'none' } : styles.buttonContain}>
               <SignInButton label={'Sign-in'} onPress={handleSubmit(onSubmit)} />
               <TouchableOpacity
@@ -137,17 +129,6 @@ const styles = StyleSheet.create({
   },
   inputText: {
     marginTop: 23,
-  },
-  input: {
-    borderColor: 'black',
-    marginTop: 12,
-    width: '76%',
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 12,
-    marginBottom: 10,
-    paddingLeft: 10,
-    fontSize: 16,
   },
   singText: {
     fontSize: 14,
