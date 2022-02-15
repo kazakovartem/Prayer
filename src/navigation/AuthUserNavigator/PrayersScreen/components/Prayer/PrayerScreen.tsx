@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { authScreenProp } from '../../types/index';
-import { Routes } from '../../navigation/types';
+import { authScreenProp } from '../../../../../types/index';
+import { Routes } from '../../../../../navigation/types';
 import { useSelector } from 'react-redux';
-import { selectors } from '../../state/ducks/ducks';
+import { selectors } from '../../../../../state/ducks/ducks';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { useDispatch } from 'react-redux';
-import { actions } from '../../state/ducks/ducks';
+import { actions } from '../../../../../state/ducks/ducks';
 
 type PrayerProps = {
   label: string;
@@ -114,7 +114,7 @@ const Prayer: FC<PrayerProps> = (props) => {
                   <View style={viewUpdateInput ? { display: 'none' } : styles.touchCheckBox}>
                     <Image
                       style={props.isChecked ? {} : { display: 'none' }}
-                      source={require('../../assets/image/Check.png')}
+                      source={require('../../../../../assets/image/Check.png')}
                     />
                   </View>
                 </TouchableOpacity>
@@ -134,9 +134,9 @@ const Prayer: FC<PrayerProps> = (props) => {
                 </TouchableOpacity>
               </View>
               <View style={styles.iconContain}>
-                <Image source={require('../../assets/image/userIcon.png')} />
+                <Image source={require('../../../../../assets/image/userIcon.png')} />
                 <Text style={styles.iconContainText}>3</Text>
-                <Image source={require('../../assets/image/prayerBlue.png')} />
+                <Image source={require('../../../../../assets/image/prayerBlue.png')} />
                 <Text style={styles.iconContainText}>123</Text>
               </View>
             </View>

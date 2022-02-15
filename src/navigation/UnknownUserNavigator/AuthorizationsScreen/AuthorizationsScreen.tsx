@@ -10,16 +10,16 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Routes } from '../types';
-import { authScreenProp } from '../../types/index';
+import { Routes } from '../../types';
+import { authScreenProp } from '../../../types/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../../state/ducks/ducks';
+import { actions } from '../../../state/ducks/ducks';
 import { useForm, Controller } from 'react-hook-form';
-import SignInButton from '../../UI/SignButton/SignButton';
-import LoginHeader from '../../UI/LoginHeader/LoginHeader';
-import { selectors } from '../../state/ducks/ducks';
+import SignInButton from '../../../UI/SignButton/SignButton';
+import LoginHeader from '../../../UI/LoginHeader/LoginHeader';
+import { selectors } from '../../../state/ducks/ducks';
 
-const AuthenticationScreen = () => {
+const AuthorizationsScreen = () => {
   const navigation = useNavigation<authScreenProp>();
   const dispatch = useDispatch();
   const [expectationUser, setExpectationUser] = useState(false);
@@ -116,7 +116,7 @@ const AuthenticationScreen = () => {
   );
 };
 
-export default AuthenticationScreen;
+export default AuthorizationsScreen;
 
 const styles = StyleSheet.create({
   content: {

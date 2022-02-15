@@ -8,15 +8,15 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from 'react-native';
-import { selectors } from '../../state/ducks/ducks';
-import LoginHeader from '../../UI/LoginHeader/LoginHeader';
+import { selectors } from '../../../state/ducks/ducks';
+import LoginHeader from '../../../UI/LoginHeader/LoginHeader';
 import { useForm, Controller } from 'react-hook-form';
-import SignInButton from '../../UI/SignButton/SignButton';
+import SignInButton from '../../../UI/SignButton/SignButton';
 import { useNavigation } from '@react-navigation/native';
-import { Routes } from '../types';
-import { authScreenProp } from '../../types/index';
+import { Routes } from '../../types';
+import { authScreenProp } from '../../../types/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../../state/ducks/ducks';
+import { actions } from '../../../state/ducks/ducks';
 
 const RegistrationScreen = () => {
   const navigation = useNavigation<authScreenProp>();

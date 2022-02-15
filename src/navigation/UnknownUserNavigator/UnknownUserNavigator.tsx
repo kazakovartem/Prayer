@@ -1,12 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Authorizations from './screens/AuthorizationsScreen';
-import Registration from './screens/RegistrationScreen';
-import { Routes } from './types';
+import Authorizations from './AuthorizationsScreen';
+import Registration from './RegistrationScreen';
+import { Routes } from '../types';
 
 const Stack = createNativeStackNavigator();
 
-const UnknownUserNavigation = () => {
+const UnknownUserNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName={Routes.SignIn}
@@ -19,4 +19,4 @@ const UnknownUserNavigation = () => {
     </Stack.Navigator>
   );
 };
-export default UnknownUserNavigation;
+export default UnknownUserNavigator;

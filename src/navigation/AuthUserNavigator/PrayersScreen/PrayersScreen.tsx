@@ -9,11 +9,11 @@ import {
   Image,
   SafeAreaView,
 } from 'react-native';
-import Prayer from '../../components/Prayer/PrayerScreen';
-import { selectors } from '../../state/ducks/ducks';
+import Prayer from './components/Prayer';
+import { selectors } from '../../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { actions } from '../../state/ducks/ducks';
+import { actions } from '../../../state/ducks/ducks';
 
 interface IColumnsScreen {
   route: {
@@ -101,7 +101,7 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
               style={{ width: 24, height: 24 }}
             >
               <Image
-                source={require('../../assets/image/settings.png')}
+                source={require('../../../assets/image/settings.png')}
                 style={{ width: 24, height: 24 }}
               />
             </TouchableOpacity>
@@ -161,7 +161,7 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
               }}
             >
               <Image
-                source={require('../../assets/image/Union.png')}
+                source={require('../../../assets/image/Union.png')}
                 style={{ width: 15, height: 15 }}
               />
             </TouchableOpacity>

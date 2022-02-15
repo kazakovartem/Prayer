@@ -10,12 +10,12 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { authScreenProp } from '../../types/index';
-import { selectors } from '../../state/ducks/ducks';
+import { authScreenProp } from '../../../types/index';
+import { selectors } from '../../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
-import Comment from '../../components/Comment/CommentScreen';
+import Comment from './components/Comment';
 import { useDispatch } from 'react-redux';
-import { actions } from '../../state/ducks/ducks';
+import { actions } from '../../../state/ducks/ducks';
 
 interface IOnePrayerScreen {
   route: {
@@ -62,7 +62,7 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
               }}
             >
               <Image
-                source={require('../../assets/image/back.png')}
+                source={require('../../../assets/image/back.png')}
                 style={{ width: 24, height: 24 }}
               />
             </TouchableOpacity>
@@ -72,7 +72,7 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
               }}
             >
               <Image
-                source={require('../../assets/image/prayer.png')}
+                source={require('../../../assets/image/prayer.png')}
                 style={{ width: 29, height: 29 }}
               />
             </TouchableOpacity>
@@ -115,11 +115,11 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
                 <Text style={{ fontSize: 13, color: '#72A8BC' }}>MEMBERS</Text>
                 <View style={styles.imageMemberContain}>
                   <Image
-                    source={require('../../assets/image/FirstMember.png')}
+                    source={require('../../../assets/image/FirstMember.png')}
                     style={{ marginRight: 7, borderRadius: 20, width: 33, height: 31 }}
                   />
                   <Image
-                    source={require('../../assets/image/SecondMember.png')}
+                    source={require('../../../assets/image/SecondMember.png')}
                     style={{ marginRight: 7, borderRadius: 20, width: 33, height: 31 }}
                   />
                   <View style={styles.addMemberButton}>
@@ -185,7 +185,7 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
               }}
             >
               <Image
-                source={require('../../assets/image/AddComment.png')}
+                source={require('../../../assets/image/AddComment.png')}
                 style={{ marginTop: 12, width: 24, height: 24 }}
               />
             </TouchableOpacity>

@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { authScreenProp } from '../../types/index';
-import { Routes } from '../../navigation/types';
+import { authScreenProp } from '../../../../../types/index';
+import { Routes } from '../../../../../navigation/types';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { useDispatch } from 'react-redux';
-import { actions } from '../../state/ducks/ducks';
-import { selectors } from '../../state/ducks/ducks';
+import { actions } from '../../../../../state/ducks/ducks';
+import { selectors } from '../../../../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 
 type ColumnProps = {

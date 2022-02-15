@@ -1,12 +1,12 @@
 import React, { useState, useEffect, FC } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { authScreenProp } from '../../types/index';
-import { Routes } from '../../navigation/types';
+import { authScreenProp } from '../../../../../types/index';
+import { Routes } from '../../../../../navigation/types';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { useDispatch } from 'react-redux';
-import { actions } from '../../state/ducks/ducks';
-import { selectors } from '../../state/ducks/ducks';
+import { actions } from '../../../../../state/ducks/ducks';
+import { selectors } from '../../../../../state/ducks/ducks';
 import { useSelector } from 'react-redux';
 
 type CommentProps = {
@@ -25,9 +25,9 @@ const Comment: FC<CommentProps> = (props) => {
   const [textInputUpdate, setOnChangeTextInputUpdate] = useState(inputValueLocal);
   const dispatch = useDispatch();
   const image = [
-    require('../../assets/image/comment.png'),
-    require('../../assets/image/FirstMember.png'),
-    require('../../assets/image/SecondMember.png'),
+    require('../../../../../assets/image/comment.png'),
+    require('../../../../../assets/image/FirstMember.png'),
+    require('../../../../../assets/image/SecondMember.png'),
   ];
   const countImage = props.count % 3;
   let idLocal = 0;
