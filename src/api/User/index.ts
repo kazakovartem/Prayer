@@ -1,4 +1,4 @@
-import { api } from '../index';
+import { api } from '../httpClient';
 import { SIGN_IN, SIGN_UP } from '../types';
 
 export async function signIn(email: string, password: string) {

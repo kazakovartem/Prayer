@@ -49,7 +49,7 @@ const AuthorizationsScreen = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
       <View style={styles.content}>
         <LoginHeader label={'Sign-in'} />
         <ScrollView style={styles.bodyContain}>
@@ -83,24 +83,21 @@ const AuthorizationsScreen = () => {
               name="password"
             />
             {errors.password && <Text style={{ color: 'red' }}>This is very simple.</Text>}
-            <ActivityIndicator
-              size="large"
-              style={expectationUser ? { marginTop: 32 } : { display: 'none' }}
-            />
-            <View style={expectationUser ? { display: 'none' } : styles.buttonContain}>
-              <SignInButton label={'Sign-in'} onPress={handleSubmit(onSubmit)} />
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate(Routes.SignUp);
-                  dispatch(actions.user.deleteMessage({ message: null }));
-                }}
-              >
-                <Text style={styles.singText}>Sign-up</Text>
-              </TouchableOpacity>
-            </View>
-            <Text style={user.message ? styles.inputText : { display: 'none' }}>
-              {user.message}
-            </Text>
+            {expectationUser && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
+            {!expectationUser && (
+              <View style={styles.buttonContain}>
+                <SignInButton label={'Sign-in'} onPress={handleSubmit(onSubmit)} />
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate(Routes.SignUp);
+                    dispatch(actions.user.deleteMessage({ message: null }));
+                  }}
+                >
+                  <Text style={styles.singText}>Sign-up</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+            {user.message && <Text style={styles.inputText}>{user.message}</Text>}
           </View>
         </ScrollView>
       </View>

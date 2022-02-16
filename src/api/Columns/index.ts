@@ -1,4 +1,4 @@
-import { api } from '../index';
+import { api } from '../httpClient';
 import { COLUMNS } from '../types';
 
 export async function getAllColumns() {

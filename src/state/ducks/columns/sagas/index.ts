@@ -1,12 +1,12 @@
 import { call, put, takeLatest, takeLeading } from 'redux-saga/effects';
 import { sagasTypeColumns } from '../types';
 import types from '../types';
-import { routsDirect } from '../../../../api/routsDirect';
+import api from '../../../../api';
 import { IAddColumnInState, IUpdateColumnInState, IDeleteColumnInState } from '../types';
 
 export function* addColumnsInState() {
   try {
-    const { data } = yield call(routsDirect.columns.getAllColumns);
+    const { data } = yield call(api.columns.getAllColumns);
     yield put({
       type: types.DELL_ALL_COLUMNS,
     });
@@ -30,7 +30,7 @@ export function* addColumnInState({ payload }: IAddColumnInState) {
   try {
     console.log(payload);
     const { data } = yield call(
-      routsDirect.columns.createNewColumn,
+      api.columns.createNewColumn,
       payload.title,
       payload.description,
     );
@@ -57,7 +57,7 @@ export function* updateColumnInState({ payload }: IUpdateColumnInState) {
         title: payload.title,
       },
     });
-    yield call(routsDirect.columns.updateColumn, payload.id, payload.title, payload.description);
+    yield call(api.columns.updateColumn, payload.id, payload.title, payload.description);
   } catch (error) {
     console.log(error);
   }
@@ -71,7 +71,7 @@ export function* deleteColumnInState({ payload }: IDeleteColumnInState) {
         id: payload.id,
       },
     });
-    yield call(routsDirect.columns.deleteColumn, payload.id);
+    yield call(api.columns.deleteColumn, payload.id);
   } catch (error) {
     console.log(error);
   }

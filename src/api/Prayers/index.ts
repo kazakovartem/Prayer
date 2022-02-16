@@ -1,4 +1,4 @@
-import { api } from '../index';
+import { api } from '../httpClient';
 import { PRAYERS, COLUMNS } from '../types';
 
 export async function getAllPrayers() {

@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { authScreenProp } from '../../../../../types/index';
-import { Routes } from '../../../../../navigation/types';
+import { Routes } from '../../../../types';
 import { useSelector } from 'react-redux';
 import { selectors } from '../../../../../state/ducks/ducks';
 import { SwipeRow } from 'react-native-swipe-list-view';
@@ -98,42 +98,46 @@ const Prayer: FC<PrayerProps> = (props) => {
           <View style={styles.containerContent}>
             <View style={styles.containerContentInside}>
               <View style={styles.colorLine}></View>
+              {viewUpdateInput && (
+                <View style={styles.newColl}>
+                  <InputChangeInComponent
+                    value={text}
+                    onChangeText={setOnChangeText}
+                    containerStyle={styles.textInput}
+                  />
+                </View>
+              )}
 
-              <View style={viewUpdateInput ? styles.newColl : { display: 'none' }}>
-                <InputChangeInComponent
-                  value={text}
-                  onChangeText={setOnChangeText}
-                  containerStyle={styles.textInput}
-                />
-              </View>
-              <View style={viewUpdateInput ? { display: 'none' } : styles.touch}>
-                <TouchableOpacity
-                  onPress={() => {
-                    handleCheckPrayer();
-                  }}
-                >
-                  <View style={viewUpdateInput ? { display: 'none' } : styles.touchCheckBox}>
-                    <Image
-                      style={props.isChecked ? {} : { display: 'none' }}
-                      source={require('../../../../../assets/image/Check.png')}
-                    />
-                  </View>
-                </TouchableOpacity>
+              {!viewUpdateInput && (
+                <View style={styles.touch}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      handleCheckPrayer();
+                    }}
+                  >
+                    <View style={styles.touchCheckBox}>
+                      {props.isChecked && (
+                        <Image source={require('../../../../../assets/image/Check.png')} />
+                      )}
+                    </View>
+                  </TouchableOpacity>
 
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate(Routes.Prayer, {
-                      itemId: props.idPrayer,
-                      otherParam: 'anything you want here',
-                    });
-                  }}
-                  style={styles.text}
-                >
-                  <Text style={props.isChecked ? { textDecorationLine: 'line-through' } : {}}>
-                    {props.label}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate(Routes.Prayer, {
+                        itemId: props.idPrayer,
+                        otherParam: 'anything you want here',
+                      });
+                    }}
+                    style={styles.text}
+                  >
+                    <Text style={props.isChecked ? { textDecorationLine: 'line-through' } : {}}>
+                      {props.label}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+
               <View style={styles.iconContain}>
                 <Image source={require('../../../../../assets/image/userIcon.png')} />
                 <Text style={styles.iconContainText}>3</Text>

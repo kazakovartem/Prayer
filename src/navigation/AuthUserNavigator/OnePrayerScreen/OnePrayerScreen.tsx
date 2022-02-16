@@ -52,7 +52,7 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView  style={{flex: 1, backgroundColor: '#FFF'}}>
       <View style={styles.content}>
         <View style={styles.header}>
           <View style={styles.heardButtonContainer}>

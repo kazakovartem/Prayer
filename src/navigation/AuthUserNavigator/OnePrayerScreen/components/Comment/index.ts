@@ -1,3 +1,3 @@
-import CommentScreen from './CommentScreen';
+import Comment from './Comment';
 
-export default CommentScreen;
+export default Comment;

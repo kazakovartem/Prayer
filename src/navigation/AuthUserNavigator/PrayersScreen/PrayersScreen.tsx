@@ -80,7 +80,7 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
       <View style={styles.content}>
         <View style={styles.header}>
           <View
@@ -154,122 +154,122 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={subPrayers ? { display: 'none' } : styles.body}>
-          <View style={styles.inputAdd}>
-            <TouchableOpacity
-              onPress={() => {
-                handleAddPrayer();
-              }}
-            >
-              <Image
-                source={require('../../../assets/image/Union.png')}
-                style={{ width: 15, height: 15 }}
+        {!subPrayers && (
+          <View style={styles.body}>
+            <View style={styles.inputAdd}>
+              <TouchableOpacity
+                onPress={() => {
+                  handleAddPrayer();
+                }}
+              >
+                <Image
+                  source={require('../../../assets/image/Union.png')}
+                  style={{ width: 15, height: 15 }}
+                />
+              </TouchableOpacity>
+              <TextInput
+                style={styles.inputForm}
+                placeholder="Add new prater ..."
+                value={text}
+                onChangeText={setOnChangeText}
               />
-            </TouchableOpacity>
-            <TextInput
-              style={styles.inputForm}
-              placeholder="Add new prater ..."
-              value={text}
-              onChangeText={setOnChangeText}
-            />
+            </View>
+            <ScrollView>
+              <View style={styles.bodyScroll}>
+                {prayersNotChecked.map((prayer) => {
+                  return (
+                    <Prayer
+                      label={prayer.title}
+                      idPrayer={prayer.id}
+                      key={prayer.id}
+                      isChecked={false}
+                    />
+                  );
+                })}
+                <View
+                  style={
+                    prayersCheckedIsAssign
+                      ? checkedPrayers
+                        ? styles.hideCheckTextContain
+                        : styles.showCheckTextContain
+                      : { display: 'none' }
+                  }
+                >
+                  {prayersCheckedIsAssign && (
+                    <ShowCheckedPrayer
+                      label={HideCheckText}
+                      onViewText={() => {
+                        handleViewCheck();
+                      }}
+                      containerStyle={styles.hideCheckText}
+                    />
+                  )}
+                </View>
+                {checkedPrayers && (
+                  <View style={styles.checkPrayers}>
+                    {prayersChecked.map((prayer, index) => {
+                      return (
+                        <Prayer
+                          label={prayer.title}
+                          idPrayer={prayer.id}
+                          key={index}
+                          isChecked={true}
+                        />
+                      );
+                    })}
+                  </View>
+                )}
+              </View>
+            </ScrollView>
           </View>
-          <ScrollView>
-            <View style={styles.bodyScroll}>
-              {prayersNotChecked.map((prayer) => {
-                return (
-                  <Prayer
-                    label={prayer.title}
-                    idPrayer={prayer.id}
-                    key={prayer.id}
-                    isChecked={false}
-                  />
-                );
-              })}
-              <View
-                style={
-                  prayersCheckedIsAssign
-                    ? checkedPrayers
-                      ? styles.hideCheckTextContain
-                      : styles.showCheckTextContain
-                    : { display: 'none' }
-                }
-              >
-                <ShowCheckedPrayer
-                  label={HideCheckText}
-                  onViewText={() => {
-                    handleViewCheck();
-                  }}
-                  containerStyle={
-                    prayersCheckedIsAssign
-                      ? styles.hideCheckText
-                      : { display: 'none', borderColor: '#FFF' }
-                  }
-                />
-              </View>
-              <View style={checkedPrayers ? styles.checkPrayers : { display: 'none' }}>
-                {prayersChecked.map((prayer, index) => {
+        )}
+        {subPrayers && (
+          <View style={styles.body}>
+            <ScrollView>
+              <View style={styles.bodyScroll}>
+                {prayersNotChecked.map((prayer) => {
                   return (
                     <Prayer
                       label={prayer.title}
                       idPrayer={prayer.id}
-                      key={index}
-                      isChecked={true}
+                      key={prayer.id}
+                      isChecked={false}
                     />
                   );
                 })}
-              </View>
-            </View>
-          </ScrollView>
-        </View>
-        <View style={subPrayers ? styles.body : { display: 'none' }}>
-          <ScrollView>
-            <View style={styles.bodyScroll}>
-              {prayersNotChecked.map((prayer) => {
-                return (
-                  <Prayer
-                    label={prayer.title}
-                    idPrayer={prayer.id}
-                    key={prayer.id}
-                    isChecked={false}
-                  />
-                );
-              })}
-              <View
-                style={
-                  prayersCheckedIsAssign
-                    ? checkedPrayers
-                      ? styles.hideCheckTextContain
-                      : styles.showCheckTextContain
-                    : { display: 'none' }
-                }
-              >
-                <ShowCheckedPrayer
-                  label={HideCheckText}
-                  onViewText={() => {
-                    handleViewCheck();
-                  }}
-                  containerStyle={
-                    prayersCheckedIsAssign
-                      ? styles.hideCheckText
-                      : { display: 'none', borderColor: '#FFF' }
-                  }
-                />
-              </View>
-              <View style={checkedPrayers ? styles.checkPrayers : { display: 'none' }}>
-                {prayersChecked.map((prayer, index) => {
-                  return (
-                    <Prayer
-                      label={prayer.title}
-                      idPrayer={prayer.id}
-                      key={index}
-                      isChecked={true}
+                {prayersCheckedIsAssign && (
+                  <View
+                    style={
+                      checkedPrayers ? styles.hideCheckTextContain : styles.showCheckTextContain
+                    }
+                  >
+                    <ShowCheckedPrayer
+                      label={HideCheckText}
+                      onViewText={() => {
+                        handleViewCheck();
+                      }}
+                      containerStyle={styles.hideCheckText}
                     />
-                  );
-                })}
+                  </View>
+                )}
+                {checkedPrayers && (
+                  <View style={styles.checkPrayers}>
+                    {prayersChecked.map((prayer, index) => {
+                      return (
+                        <Prayer
+                          label={prayer.title}
+                          idPrayer={prayer.id}
+                          key={index}
+                          isChecked={true}
+                        />
+                      );
+                    })}
+                  </View>
+                )}
               </View>
-            </View>
-          </ScrollView>
-        </View>
+            </ScrollView>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );

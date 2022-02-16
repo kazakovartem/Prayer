@@ -12,12 +12,12 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		6172F2D35A4C3AA820D92908 /* libPods-Prayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-Prayer.a */; };
+		69845E456D4743B290A5910A /* SFUIText-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2054E4EF2C7B4620BE9E4BA7 /* SFUIText-Light.ttf */; };
 		7EF68E3733C33B6898317E18 /* libPods-Prayer-PrayerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-Prayer-PrayerTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		92AD40BF8CEA4A17999020C1 /* SFUIDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36D3B4DD2CDE4203839D7670 /* SFUIDisplay-Thin.ttf */; };
-		69845E456D4743B290A5910A /* SFUIText-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2054E4EF2C7B4620BE9E4BA7 /* SFUIText-Light.ttf */; };
-		9D0BF0E3A4A6415FB66C2303 /* SFUIText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3F7AB2494E64ED6B542FA64 /* SFUIText-Medium.ttf */; };
 		8C9810F1BA87402E8026336E /* SFUIText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D55A27CFAC184EAA97493EBD /* SFUIText-Regular.ttf */; };
+		92AD40BF8CEA4A17999020C1 /* SFUIDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36D3B4DD2CDE4203839D7670 /* SFUIDisplay-Thin.ttf */; };
+		9D0BF0E3A4A6415FB66C2303 /* SFUIText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3F7AB2494E64ED6B542FA64 /* SFUIText-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,17 +41,17 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Prayer/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Prayer/main.m; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-Prayer-PrayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prayer-PrayerTests.release.xcconfig"; path = "Target Support Files/Pods-Prayer-PrayerTests/Pods-Prayer-PrayerTests.release.xcconfig"; sourceTree = "<group>"; };
+		2054E4EF2C7B4620BE9E4BA7 /* SFUIText-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFUIText-Light.ttf"; path = "../src/assets/founts/SFUIText-Light.ttf"; sourceTree = "<group>"; };
+		36D3B4DD2CDE4203839D7670 /* SFUIDisplay-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFUIDisplay-Thin.ttf"; path = "../src/assets/founts/SFUIDisplay-Thin.ttf"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-Prayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Prayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-Prayer-PrayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prayer-PrayerTests.debug.xcconfig"; path = "Target Support Files/Pods-Prayer-PrayerTests/Pods-Prayer-PrayerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Prayer/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A3F7AB2494E64ED6B542FA64 /* SFUIText-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFUIText-Medium.ttf"; path = "../src/assets/founts/SFUIText-Medium.ttf"; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-Prayer-PrayerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Prayer-PrayerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A881CF5CF3F2B244570E2A /* Pods-Prayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prayer.debug.xcconfig"; path = "Target Support Files/Pods-Prayer/Pods-Prayer.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-Prayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prayer.release.xcconfig"; path = "Target Support Files/Pods-Prayer/Pods-Prayer.release.xcconfig"; sourceTree = "<group>"; };
+		D55A27CFAC184EAA97493EBD /* SFUIText-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFUIText-Regular.ttf"; path = "../src/assets/founts/SFUIText-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		36D3B4DD2CDE4203839D7670 /* SFUIDisplay-Thin.ttf */ = {isa = PBXFileReference; name = "SFUIDisplay-Thin.ttf"; path = "../src/assets/founts/SFUIDisplay-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2054E4EF2C7B4620BE9E4BA7 /* SFUIText-Light.ttf */ = {isa = PBXFileReference; name = "SFUIText-Light.ttf"; path = "../src/assets/founts/SFUIText-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A3F7AB2494E64ED6B542FA64 /* SFUIText-Medium.ttf */ = {isa = PBXFileReference; name = "SFUIText-Medium.ttf"; path = "../src/assets/founts/SFUIText-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D55A27CFAC184EAA97493EBD /* SFUIText-Regular.ttf */ = {isa = PBXFileReference; name = "SFUIText-Regular.ttf"; path = "../src/assets/founts/SFUIText-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +114,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		384C4C43B8BF4ACEBB4ADC39 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				36D3B4DD2CDE4203839D7670 /* SFUIDisplay-Thin.ttf */,
+				2054E4EF2C7B4620BE9E4BA7 /* SFUIText-Light.ttf */,
+				A3F7AB2494E64ED6B542FA64 /* SFUIText-Medium.ttf */,
+				D55A27CFAC184EAA97493EBD /* SFUIText-Regular.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,18 +169,6 @@
 			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		384C4C43B8BF4ACEBB4ADC39 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				36D3B4DD2CDE4203839D7670 /* SFUIDisplay-Thin.ttf */,
-				2054E4EF2C7B4620BE9E4BA7 /* SFUIText-Light.ttf */,
-				A3F7AB2494E64ED6B542FA64 /* SFUIText-Medium.ttf */,
-				D55A27CFAC184EAA97493EBD /* SFUIText-Regular.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -586,7 +586,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 i386";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -652,7 +652,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 i386";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -1,3 +1,3 @@
-import ColumnScreen from './ColumnScreen';
+import Column from './Column';
 
-export default ColumnScreen;
+export default Column;

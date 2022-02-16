@@ -37,7 +37,7 @@ const ColumnsScreen = () => {
     setAddNewColumnText('');
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.screenTitle}>My Deck</Text>
@@ -56,21 +56,23 @@ const ColumnsScreen = () => {
           {columns.map((column) => {
             return <Column label={column.title} idColumn={column.id} key={column.id} />;
           })}
-          <View style={viewAddInput ? styles.newColl : { display: 'none' }}>
-            <InputChangeInComponent
-              value={addNewColumnText}
-              onChangeText={setAddNewColumnText}
-              containerStyle={styles.textInput}
-            />
+          {viewAddInput && (
+            <View style={styles.newColl}>
+              <InputChangeInComponent
+                value={addNewColumnText}
+                onChangeText={setAddNewColumnText}
+                containerStyle={styles.textInput}
+              />
 
-            <TouchableOpacity
-              onPress={() => {
-                handleNewColumn();
-              }}
-            >
-              <View style={styles.touchInput}></View>
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity
+                onPress={() => {
+                  handleNewColumn();
+                }}
+              >
+                <View style={styles.touchInput}></View>
+              </TouchableOpacity>
+            </View>
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>

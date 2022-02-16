@@ -1,13 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { sagasTypePrayers } from '../types';
 import types from '../types';
-import { routsDirect } from '../../../../api/routsDirect';
+import api from '../../../../api';
 import { IAddPrayerInState, IUpdatePrayerInState, IDeletePrayerInState, IUpdatePrayerCommentsInState } from '../types';
 import { sagasTypeComments } from '../../comments/types';
 
 export function* addAllPrayersInState() {
   try {
-    const { data } = yield call(routsDirect.prayers.getAllPrayers);
+    const { data } = yield call(api.prayers.getAllPrayers);
     yield put({
       type: types.DELL_ALL_PRAYERS,
     });
@@ -33,7 +33,7 @@ export function* addAllPrayersInState() {
 export function* addPrayerInState({ payload }: IAddPrayerInState) {
   try {
     const { data } = yield call(
-      routsDirect.prayers.createPrayer,
+      api.prayers.createPrayer,
       payload.id,
       payload.title,
       payload.description,
@@ -57,7 +57,7 @@ export function* addPrayerInState({ payload }: IAddPrayerInState) {
 export function* updatePrayerInState({ payload }: IUpdatePrayerInState) {
   try {
     const { data } = yield call(
-      routsDirect.prayers.updatePrayer,
+      api.prayers.updatePrayer,
       payload.id,
       payload.title,
       payload.description,
@@ -109,7 +109,7 @@ export function* deletePrayerInState({ payload }: IDeletePrayerInState) {
     }
     
 
-    yield call(routsDirect.prayers.deletePrayer, payload.id);
+    yield call(api.prayers.deletePrayer, payload.id);
   } catch (error) {
     console.log(error);
   }

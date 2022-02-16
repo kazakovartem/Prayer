@@ -78,40 +78,51 @@ const Comment: FC<CommentProps> = (props) => {
       </View>
       <View style={styles.container}>
         <View style={styles.containerContent}>
-          <View style={viewAddInput ? styles.newColl : { display: 'none' }}>
-            <Image
-              source={image[countImage]}
-              style={{ marginLeft: 14, marginTop: 14, borderRadius: 20, width: 46, height: 46 }}
-            />
-            <View style={{ display: 'flex', flexDirection: 'column', height: 50, marginLeft: 9 }}>
-              <View style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
-                <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
-                <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
-              </View>
-              <InputChangeInComponent
-                value={textInputUpdate}
-                onChangeText={setOnChangeTextInputUpdate}
-                containerStyle={styles.textInput}
-              />
-            </View>
-          </View>
-          <View style={viewAddInput ? { display: 'none' } : styles.touch}>
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
+          {viewAddInput && (
+            <View style={styles.newColl}>
               <Image
                 source={image[countImage]}
                 style={{ marginLeft: 14, marginTop: 14, borderRadius: 20, width: 46, height: 46 }}
               />
               <View style={{ display: 'flex', flexDirection: 'column', height: 50, marginLeft: 9 }}>
-                <View
-                  style={{ display: 'flex', flexDirection: 'row', marginTop: 15, marginBottom: 2 }}
-                >
+                <View style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
                   <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
                   <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
                 </View>
-                <Text style={{ fontSize: 17 }}>{comment?.body}</Text>
+                <InputChangeInComponent
+                  value={textInputUpdate}
+                  onChangeText={setOnChangeTextInputUpdate}
+                  containerStyle={styles.textInput}
+                />
               </View>
             </View>
-          </View>
+          )}
+          {!viewAddInput && (
+            <View style={styles.touch}>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Image
+                  source={image[countImage]}
+                  style={{ marginLeft: 14, marginTop: 14, borderRadius: 20, width: 46, height: 46 }}
+                />
+                <View
+                  style={{ display: 'flex', flexDirection: 'column', height: 50, marginLeft: 9 }}
+                >
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      marginTop: 15,
+                      marginBottom: 2,
+                    }}
+                  >
+                    <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
+                    <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
+                  </View>
+                  <Text style={{ fontSize: 17 }}>{comment?.body}</Text>
+                </View>
+              </View>
+            </View>
+          )}
         </View>
       </View>
     </SwipeRow>

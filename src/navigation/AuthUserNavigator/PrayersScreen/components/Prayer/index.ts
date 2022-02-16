@@ -1,3 +1,3 @@
-import PrayerScreen from './PrayerScreen';
+import Prayer from './Prayer';
 
-export default PrayerScreen;
+export default Prayer;

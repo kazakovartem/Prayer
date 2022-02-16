@@ -1,3 +1,1 @@
-import ShowCheckedPrayer from './ShowCheckedPrayer';
-
-export default ShowCheckedPrayer;
+export { default } from './ShowCheckedPrayer';

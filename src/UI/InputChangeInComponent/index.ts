@@ -1,3 +1,1 @@
-import InputChangeInComponent from './InputChangeInComponent';
-
-export default InputChangeInComponent;
+export { default } from './InputChangeInComponent';

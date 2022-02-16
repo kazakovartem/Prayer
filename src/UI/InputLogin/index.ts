@@ -1,3 +1,1 @@
-import InputLogin from './InputLogin';
-
-export default InputLogin;
+export { default } from './InputLogin';

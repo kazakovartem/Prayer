@@ -1,7 +1,7 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
 import { sagasTypeUser } from '../types';
 import types from '../types';
-import { routsDirect } from '../../../../api/routsDirect';
+import api from '../../../../api';
 import columnTypes from '../../columns/types';
 import { sagasTypeColumns } from '../../columns/types';
 import { sagasTypePrayers } from '../../prayers/types';
@@ -10,7 +10,7 @@ import { IAddUserInState, IErrorUserSaga } from '../types';
 
 export function* addUserInState({ payload }: IAddUserInState) {
   try {
-    const { data } = yield call(routsDirect.user.signIn, payload.email, payload.password);
+    const { data } = yield call(api.user.signIn, payload.email, payload.password);
     if (data.message){
       yield put({
         type: types.ERROR_USER,
@@ -40,7 +40,7 @@ export function* addUserInState({ payload }: IAddUserInState) {
 export function* addUserNewInState({ payload }: IAddUserInState) {
   try {
     const { data } = yield call(
-      routsDirect.user.signUp,
+      api.user.signUp,
       payload.email,
       payload.name,
       payload.password,

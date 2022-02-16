@@ -1,13 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { sagasTypeComments } from '../types';
 import types from '../types';
-import { routsDirect } from '../../../../api/routsDirect';
+import api from '../../../../api';
 import { IAddCommentInState, IDeleteCommentInState, IUpdateCommentInState } from '../types';
 import { sagasTypePrayers } from '../../prayers/types';
 
 export function* addCommentsInState() {
   try {
-    const { data } = yield call(routsDirect.comments.getAllComments);
+    const { data } = yield call(api.comments.getAllComments);
     yield put({
       type: types.DELETE_ALL_COMMENTS,
     });
@@ -30,7 +30,7 @@ export function* addCommentsInState() {
 
 export function* addCommentInState({ payload }: IAddCommentInState) {
   try {
-    const { data } = yield call(routsDirect.comments.createNewComment, payload.id, payload.body);
+    const { data } = yield call(api.comments.createNewComment, payload.id, payload.body);
 
     yield put({
       type: types.ADD_COMMENT,
@@ -62,7 +62,7 @@ export function* deleteCommentInState({ payload }: IDeleteCommentInState) {
       },
     });
 
-    yield call(routsDirect.comments.deleteComment, payload.id);
+    yield call(api.comments.deleteComment, payload.id);
   } catch (error) {
     console.log(error);
   }
@@ -70,7 +70,7 @@ export function* deleteCommentInState({ payload }: IDeleteCommentInState) {
 
 export function* updateCommentInState({ payload }: IUpdateCommentInState) {
   try {
-    const { data } = yield call(routsDirect.comments.updateComment, payload.id, payload.body);
+    const { data } = yield call(api.comments.updateComment, payload.id, payload.body);
 
     yield put({
       type: types.UPDATE_COMMENT_BY_ID,

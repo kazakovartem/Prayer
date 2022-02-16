@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { authScreenProp } from '../../../../../types/index';
-import { Routes } from '../../../../../navigation/types';
+import { Routes } from '../../../../types';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../../../state/ducks/ducks';
@@ -64,26 +64,30 @@ const Column: FC<ColumnProps> = (props) => {
         />
       </View>
       <View style={styles.container}>
-        <View style={viewAddInput ? styles.newColl : { display: 'none' }}>
-          <InputChangeInComponent
-            value={text}
-            onChangeText={setOnChangeText}
-            containerStyle={styles.textInput}
-          />
-        </View>
-        <TouchableOpacity
-          style={viewAddInput ? { display: 'none' } : styles.touch}
-          onPress={() => {
-            navigation.navigate(Routes.Prayers, {
-              itemId: props.idColumn,
-              otherParam: props.label,
-            });
-          }}
-        >
-          <View>
-            <Text style={styles.text}>{props.label}</Text>
+        {viewAddInput && (
+          <View style={styles.newColl}>
+            <InputChangeInComponent
+              value={text}
+              onChangeText={setOnChangeText}
+              containerStyle={styles.textInput}
+            />
           </View>
-        </TouchableOpacity>
+        )}
+        {!viewAddInput && (
+          <TouchableOpacity
+            style={styles.touch}
+            onPress={() => {
+              navigation.navigate(Routes.Prayers, {
+                itemId: props.idColumn,
+                otherParam: props.label,
+              });
+            }}
+          >
+            <View>
+              <Text style={styles.text}>{props.label}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
     </SwipeRow>
   );

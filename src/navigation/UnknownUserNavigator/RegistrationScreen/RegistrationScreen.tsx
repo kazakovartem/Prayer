@@ -51,7 +51,7 @@ const RegistrationScreen = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
       <View style={styles.content}>
         <LoginHeader label="Sign-Up" />
         <View style={styles.body}>
@@ -92,24 +92,21 @@ const RegistrationScreen = () => {
             name="password"
           />
           {errors.password && <Text style={{ color: 'red' }}>This is very simple.</Text>}
-
-          <ActivityIndicator
-            size="large"
-            style={expectationUser ? { marginTop: 32 } : { display: 'none' }}
-          />
-
-          <View style={expectationUser ? { display: 'none' } : styles.buttonContain}>
-            <SignInButton label={'Sign-UP'} onPress={handleSubmit(onSubmit)} />
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate(Routes.SignIn);
-                dispatch(actions.user.deleteMessage({ message: null }));
-              }}
-            >
-              <Text style={styles.singText}>Sign-in</Text>
-            </TouchableOpacity>
-          </View>
-          <Text style={user.message ? styles.inputText : { display: 'none' }}>{user.message}</Text>
+          {expectationUser && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
+          {!expectationUser && (
+            <View style={expectationUser ? { display: 'none' } : styles.buttonContain}>
+              <SignInButton label={'Sign-UP'} onPress={handleSubmit(onSubmit)} />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(Routes.SignIn);
+                  dispatch(actions.user.deleteMessage({ message: null }));
+                }}
+              >
+                <Text style={styles.singText}>Sign-in</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {user.message && <Text style={styles.inputText}>{user.message}</Text>}
         </View>
       </View>
     </SafeAreaView>

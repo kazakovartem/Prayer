@@ -1,3 +1,1 @@
-import DeleteTouchable from './DeleteTouchable';
-
-export default DeleteTouchable;
+export { default } from './DeleteTouchable';
