@@ -33,7 +33,6 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
   const { itemId, otherParam } = route.params;
   const prayers = useSelector(selectors.prayers.selectPrayersByColumnId(itemId));
   const [textInputAddNewPrayer, setTextInputAddNewPrayer] = useState('');
-  const [subPrayers, setSubPrayers] = useState(false);
   const [activeTab, setActiveTab] = useState(TABS.PRAYERS)
   const [checkedPrayers, setCheckedPrayers] = useState(false);
   const dispatch = useDispatch();
@@ -59,14 +58,14 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
   }
 
   const handleViewSubPrayersFirst = () => {
-    if (subPrayers) {
-      setSubPrayers(false);
+    if (activeTab == TABS.SUBSCRIBED) {
+      setActiveTab(TABS.PRAYERS)
     }
   };
 
   const handleViewSubPrayersSecond = () => {
-    if (!subPrayers) {
-      setSubPrayers(true);
+    if (activeTab == TABS.PRAYERS) {
+      setActiveTab(TABS.SUBSCRIBED)
     }
   };
 
@@ -109,22 +108,22 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
             style={styles.headerSlider}
           >
             <TouchableOpacity
-              style={subPrayers ? styles.hideFirstSubButt : styles.viewFirstSubButt}
+              style={activeTab == TABS.PRAYERS ? styles.viewFirstSubButt : styles.hideFirstSubButt}
               onPress={() => {
                 handleViewSubPrayersFirst();
               }}
             >
-              <Text style={subPrayers ? styles.subColorNotActive : styles.subColorActive}>
+              <Text style={activeTab == TABS.PRAYERS ? styles.subColorActive : styles.subColorNotActive}>
                 MY PRAYERS
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={subPrayers ? styles.viewSecondSubButt : styles.hideSecondSubButt}
+              style={activeTab == TABS.SUBSCRIBED ? styles.viewSecondSubButt : styles.hideSecondSubButt}
               onPress={() => {
                 handleViewSubPrayersSecond();
               }}
             >
-              <Text style={subPrayers ? styles.subColorActive : styles.subColorNotActive}>
+              <Text style={activeTab == TABS.SUBSCRIBED ? styles.subColorActive : styles.subColorNotActive}>
                 SUBSCRIBED
               </Text>
               <View style={styles.subCount}>
@@ -133,7 +132,7 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
             </TouchableOpacity>
           </View>
         </View>
-        {!subPrayers && (
+        {activeTab == TABS.PRAYERS && (
           <View style={styles.body}>
             <View style={styles.inputAdd}>
               <TouchableOpacity
@@ -202,7 +201,7 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
             </ScrollView>
           </View>
         )}
-        {subPrayers && (
+        {activeTab == TABS.SUBSCRIBED && (
           <View style={styles.body}>
             <ScrollView>
               <View style={styles.bodyScroll}>
