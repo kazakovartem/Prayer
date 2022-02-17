@@ -28,7 +28,7 @@ interface IOnePrayerScreen {
 
 const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
   const navigation = useNavigation<authScreenProp>();
-  const [text, setOnChangeText] = useState('');
+  const [textInputAddNewComment, setTextInputAddNewComment] = useState('');
   const { itemId, otherParam } = route.params;
   const idPrayer: number = itemId;
   const dispatch = useDispatch();
@@ -36,23 +36,15 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
   const comments = useSelector(selectors.comments.selectCommentsByPrayerId(itemId));
 
   const handleAddComment = () => {
-    if (text !== '') {
-      let complete = false;
-      for (let i = 0; i < text.length; i++) {
-        if (text[i] !== ' ') {
-          complete = true;
-        }
-      }
-      if (complete) {
-        dispatch(actions.comments.createCommentSaga({ id: idPrayer, body: text }));
-      }
-
-      setOnChangeText('');
+    if (textInputAddNewComment.trim()) {
+      dispatch(actions.comments.createCommentSaga({ id: idPrayer, body: textInputAddNewComment }));
     }
+
+    setTextInputAddNewComment('');
   };
 
   return (
-    <SafeAreaView  style={{flex: 1, backgroundColor: '#FFF'}}>
+    <SafeAreaView style={styles.contentSafeArea}>
       <View style={styles.content}>
         <View style={styles.header}>
           <View style={styles.heardButtonContainer}>
@@ -61,10 +53,7 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
                 navigation.goBack();
               }}
             >
-              <Image
-                source={require('../../../assets/image/back.png')}
-                style={{ width: 24, height: 24 }}
-              />
+              <Image source={require('../../../assets/image/back.png')} style={styles.imageBack} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
@@ -73,7 +62,7 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
             >
               <Image
                 source={require('../../../assets/image/prayer.png')}
-                style={{ width: 29, height: 29 }}
+                style={styles.imagePrayer}
               />
             </TouchableOpacity>
           </View>
@@ -82,7 +71,7 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
           </View>
         </View>
         <View style={styles.body}>
-          <ScrollView style={{ height: '72%' }}>
+          <ScrollView style={styles.scrollContain}>
             <View style={styles.bodyScroll}>
               <View style={styles.timeLine}>
                 <View style={styles.colorLine}></View>
@@ -91,86 +80,52 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
               <View style={styles.timeTile}>
                 <View style={styles.timeTileFirstRow}>
                   <View style={styles.timeTileFirstRowFirstText}>
-                    <Text style={{ fontSize: 22, color: '#BFB393' }}>July 25 2017</Text>
-                    <Text style={{ fontSize: 13, color: '#514D47' }}>Date added</Text>
-                    <Text style={{ fontSize: 13, color: '#72A8BC' }}>Opened for 4 days</Text>
+                    <Text style={styles.commentMediumFirstText}>July 25 2017</Text>
+                    <Text style={styles.commentSecondText}>Date added</Text>
+                    <Text style={styles.commentThirdText}>Opened for 4 days</Text>
                   </View>
                   <View style={styles.timeTileFirstRowSecondText}>
-                    <Text style={{ fontSize: 32, color: '#BFB393' }}>123</Text>
-                    <Text style={{ fontSize: 13, color: '#514D47' }}>Times Prayed Total</Text>
+                    <Text style={styles.commentBigFirstText}>123</Text>
+                    <Text style={styles.commentSecondText}>Times Prayed Total</Text>
                   </View>
                 </View>
                 <View style={styles.timeTileSecondRow}>
                   <View style={styles.timeTileSecondRowFirstText}>
-                    <Text style={{ fontSize: 32, color: '#BFB393' }}>63</Text>
-                    <Text style={{ fontSize: 13, color: '#514D47' }}>Times Prayed by Me</Text>
+                    <Text style={styles.commentBigFirstText}>63</Text>
+                    <Text style={styles.commentSecondText}>Times Prayed by Me</Text>
                   </View>
                   <View style={styles.timeTileSecondRowSecondText}>
-                    <Text style={{ fontSize: 32, color: '#BFB393' }}>60</Text>
-                    <Text style={{ fontSize: 13, color: '#514D47' }}>Times Prayed by Others</Text>
+                    <Text style={styles.commentBigFirstText}>60</Text>
+                    <Text style={styles.commentSecondText}>Times Prayed by Others</Text>
                   </View>
                 </View>
               </View>
               <View style={styles.members}>
-                <Text style={{ fontSize: 13, color: '#72A8BC' }}>MEMBERS</Text>
+                <Text style={styles.commentThirdText}>MEMBERS</Text>
                 <View style={styles.imageMemberContain}>
                   <Image
                     source={require('../../../assets/image/FirstMember.png')}
-                    style={{ marginRight: 7, borderRadius: 20, width: 33, height: 31 }}
+                    style={styles.imageMembers}
                   />
                   <Image
                     source={require('../../../assets/image/SecondMember.png')}
-                    style={{ marginRight: 7, borderRadius: 20, width: 33, height: 31 }}
+                    style={styles.imageMembers}
                   />
                   <View style={styles.addMemberButton}>
-                    <View
-                      style={{
-                        backgroundColor: '#FFF',
-                        borderTopLeftRadius: 10,
-                        borderTopRightRadius: 10,
-                        width: 2,
-                        height: 7,
-                        marginLeft: 7,
-                      }}
-                    />
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                      <View
-                        style={{
-                          backgroundColor: '#FFF',
-                          borderTopLeftRadius: 20,
-                          borderBottomLeftRadius: 20,
-                          width: 8,
-                          height: 2,
-                        }}
-                      />
-                      <View
-                        style={{
-                          backgroundColor: '#FFF',
-                          borderTopRightRadius: 20,
-                          borderBottomRightRadius: 20,
-                          width: 7,
-                          height: 2,
-                        }}
-                      />
+                    <View style={styles.addMemberButton1} />
+                    <View style={styles.addMemberButtonCenter}>
+                      <View style={styles.addMemberButtonCenter1} />
+                      <View style={styles.addMemberButtonCenter2} />
                     </View>
-                    <View
-                      style={{
-                        marginLeft: 7,
-                        backgroundColor: '#FFF',
-                        borderBottomRightRadius: 20,
-                        borderBottomLeftRadius: 20,
-                        width: 2,
-                        height: 8,
-                      }}
-                    />
+                    <View style={styles.addMemberButton3} />
                   </View>
                 </View>
               </View>
               <View style={styles.commentsContain}>
                 <View style={styles.commentsFirstText}>
-                  <Text style={{ fontSize: 13, color: '#72A8BC' }}>COMMENTS</Text>
+                  <Text style={styles.commentThirdText}>COMMENTS</Text>
                 </View>
-                <View style={{ width: '100%', minHeight: 2 }}>
+                <View style={styles.commentContain}>
                   {comments.map((comment, index) => {
                     return <Comment key={comment.id} idComment={comment.id} count={index} />;
                   })}
@@ -186,14 +141,14 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
             >
               <Image
                 source={require('../../../assets/image/AddComment.png')}
-                style={{ marginTop: 12, width: 24, height: 24 }}
+                style={styles.imageAddComment}
               />
             </TouchableOpacity>
             <TextInput
               style={styles.textInput}
               placeholder={'Add a comment...'}
-              value={text}
-              onChangeText={setOnChangeText}
+              value={textInputAddNewComment}
+              onChangeText={setTextInputAddNewComment}
             />
           </View>
         </View>
@@ -205,6 +160,10 @@ const OnePrayerScreen = ({ route }: IOnePrayerScreen) => {
 export default OnePrayerScreen;
 
 const styles = StyleSheet.create({
+  contentSafeArea: {
+    flex: 1,
+    backgroundColor: '#FFF',
+  },
   content: {
     backgroundColor: '#ffffff',
     height: '100%',
@@ -220,6 +179,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'column',
     paddingRight: 15,
+  },
+  imageBack: {
+    width: 24,
+    height: 24,
+  },
+  imagePrayer: {
+    width: 29,
+    height: 29,
+  },
+  imageMembers: {
+    marginRight: 7,
+    borderRadius: 20,
+    width: 33,
+    height: 31,
+  },
+  imageAddComment: {
+    marginTop: 12,
+    width: 24,
+    height: 24,
   },
   heardButtonContainer: {
     width: '100%',
@@ -260,6 +238,9 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 1,
     borderColor: '#E5E5E5',
+  },
+  scrollContain: {
+    height: '72%',
   },
   colorLine: {
     width: 3,
@@ -337,10 +318,48 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 8,
   },
+  addMemberButton1: {
+    backgroundColor: '#FFF',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    width: 2,
+    height: 7,
+    marginLeft: 7,
+  },
+  addMemberButtonCenter: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  addMemberButtonCenter1: {
+    backgroundColor: '#FFF',
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    width: 8,
+    height: 2,
+  },
+  addMemberButtonCenter2: {
+    backgroundColor: '#FFF',
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    width: 7,
+    height: 2,
+  },
+  addMemberButton3: {
+    marginLeft: 7,
+    backgroundColor: '#FFF',
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    width: 2,
+    height: 8,
+  },
   commentsContain: {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+  },
+  commentContain: {
+    width: '100%',
+    minHeight: 2,
   },
   commentsFirstText: {
     height: 31,
@@ -364,5 +383,21 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     backgroundColor: '#FFF',
+  },
+  commentBigFirstText: {
+    fontSize: 32,
+    color: '#BFB393',
+  },
+  commentMediumFirstText: {
+    fontSize: 22,
+    color: '#BFB393',
+  },
+  commentSecondText: {
+    fontSize: 13,
+    color: '#514D47',
+  },
+  commentThirdText: {
+    fontSize: 13,
+    color: '#72A8BC',
   },
 });

@@ -17,27 +17,32 @@ type ColumnProps = {
   idColumn: number;
 };
 
-const Column: FC<ColumnProps> = (props) => {
+const Column: FC<ColumnProps> = ({ label, idColumn }) => {
   const navigation = useNavigation<authScreenProp>();
   const [viewAddInput, setViewAddInput] = useState(false);
-  const [text, setOnChangeText] = useState(props.label);
-  const prayers = useSelector(selectors.prayers.selectPrayersByColumnId(props.idColumn));
+  const [textInputToChangeTitle, setTextInputToChangeTitle] = useState(label);
+  const prayers = useSelector(selectors.prayers.selectPrayersByColumnId(idColumn));
   const dispatch = useDispatch();
 
   const handleChange = () => {
     if (!viewAddInput) {
       setViewAddInput(true);
     } else {
-      console.log(text);
-      dispatch(
-        actions.columns.updateColumnSaga({ title: text, id: props.idColumn, description: '' }),
-      );
+      if (textInputToChangeTitle.trim() && textInputToChangeTitle !== label) {
+        dispatch(
+          actions.columns.updateColumnSaga({
+            title: textInputToChangeTitle,
+            id: idColumn,
+            description: '',
+          }),
+        );
+      }
       setViewAddInput(false);
     }
   };
 
   const handleDelete = () => {
-    dispatch(actions.columns.deleteColumnSaga({ id: props.idColumn }));
+    dispatch(actions.columns.deleteColumnSaga({ id: idColumn }));
     prayers.map((prayer) => {
       let ids: number[] = [];
       if (prayer.commentsIds) {
@@ -67,8 +72,8 @@ const Column: FC<ColumnProps> = (props) => {
         {viewAddInput && (
           <View style={styles.newColl}>
             <InputChangeInComponent
-              value={text}
-              onChangeText={setOnChangeText}
+              value={textInputToChangeTitle}
+              onChangeText={setTextInputToChangeTitle}
               containerStyle={styles.textInput}
             />
           </View>
@@ -78,13 +83,13 @@ const Column: FC<ColumnProps> = (props) => {
             style={styles.touch}
             onPress={() => {
               navigation.navigate(Routes.Prayers, {
-                itemId: props.idColumn,
-                otherParam: props.label,
+                itemId: idColumn,
+                otherParam: label,
               });
             }}
           >
             <View>
-              <Text style={styles.text}>{props.label}</Text>
+              <Text style={styles.text}>{label}</Text>
             </View>
           </TouchableOpacity>
         )}

@@ -24,34 +24,33 @@ interface IColumnsScreen {
     };
   };
 }
+enum TABS {
+  PRAYERS,
+  SUBSCRIBED,
+};
 
 const ColumnsScreen = ({ route }: IColumnsScreen) => {
   const { itemId, otherParam } = route.params;
   const prayers = useSelector(selectors.prayers.selectPrayersByColumnId(itemId));
-  const [text, setOnChangeText] = useState('');
+  const [textInputAddNewPrayer, setTextInputAddNewPrayer] = useState('');
   const [subPrayers, setSubPrayers] = useState(false);
+  const [activeTab, setActiveTab] = useState(TABS.PRAYERS)
   const [checkedPrayers, setCheckedPrayers] = useState(false);
   const dispatch = useDispatch();
   const prayersNotChecked = prayers.filter((prayer) => prayer.checked !== true);
   const prayersChecked = prayers.filter((prayer) => prayer.checked === true);
-  let prayersCheckedIsAssign = true;
-  if (prayersChecked.length === 0) {
-    prayersCheckedIsAssign = false;
-  }
 
   const handleAddPrayer = () => {
-    if (text !== '') {
-      let complete = false;
-      for (let i = 0; i < text.length; i++) {
-        if (text[i] !== ' ') {
-          complete = true;
-        }
-      }
-      if (complete) {
-        dispatch(actions.prayers.createPrayer({ id: itemId, title: text, description: '' }));
-      }
-      setOnChangeText('');
+    if (textInputAddNewPrayer.trim()) {
+      dispatch(
+        actions.prayers.createPrayer({
+          id: itemId,
+          title: textInputAddNewPrayer,
+          description: '',
+        }),
+      );
     }
+    setTextInputAddNewPrayer('');
   };
 
   let HideCheckText = 'Show Answered Prayers';
@@ -80,7 +79,7 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
+    <SafeAreaView style={styles.contentSafeArea}>
       <View style={styles.content}>
         <View style={styles.header}>
           <View
@@ -99,22 +98,15 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
               onPress={() => {
                 console.log('tik Prayers');
               }}
-              style={{ width: 24, height: 24 }}
             >
               <Image
                 source={require('../../../assets/image/settings.png')}
-                style={{ width: 24, height: 24 }}
+                style={styles.imageSettings}
               />
             </TouchableOpacity>
           </View>
           <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              width: '100%',
-            }}
+            style={styles.headerSlider}
           >
             <TouchableOpacity
               style={subPrayers ? styles.hideFirstSubButt : styles.viewFirstSubButt}
@@ -122,7 +114,7 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
                 handleViewSubPrayersFirst();
               }}
             >
-              <Text style={subPrayers ? { color: '#C8C8C8' } : { color: '#72A8BC' }}>
+              <Text style={subPrayers ? styles.subColorNotActive : styles.subColorActive}>
                 MY PRAYERS
               </Text>
             </TouchableOpacity>
@@ -132,25 +124,12 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
                 handleViewSubPrayersSecond();
               }}
             >
-              <Text style={subPrayers ? { color: '#72A8BC' } : { color: '#C8C8C8' }}>
+              <Text style={subPrayers ? styles.subColorActive : styles.subColorNotActive}>
                 SUBSCRIBED
               </Text>
-              <Text
-                style={{
-                  marginLeft: 2,
-                  width: 16,
-                  height: 16,
-                  backgroundColor: '#AC5253',
-                  borderRadius: 9999,
-                  fontSize: 9,
-                  color: '#FFF',
-                  display: 'flex',
-                  paddingLeft: 5,
-                  paddingTop: 1,
-                }}
-              >
-                3
-              </Text>
+              <View style={styles.subCount}>
+                <Text style={styles.subCountText}>3</Text>
+              </View>
             </TouchableOpacity>
           </View>
         </View>
@@ -164,14 +143,14 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
               >
                 <Image
                   source={require('../../../assets/image/Union.png')}
-                  style={{ width: 15, height: 15 }}
+                  style={styles.imageAddPrayer}
                 />
               </TouchableOpacity>
               <TextInput
                 style={styles.inputForm}
                 placeholder="Add new prater ..."
-                value={text}
-                onChangeText={setOnChangeText}
+                value={textInputAddNewPrayer}
+                onChangeText={setTextInputAddNewPrayer}
               />
             </View>
             <ScrollView>
@@ -188,14 +167,14 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
                 })}
                 <View
                   style={
-                    prayersCheckedIsAssign
+                    prayersChecked.length !== 0
                       ? checkedPrayers
                         ? styles.hideCheckTextContain
                         : styles.showCheckTextContain
                       : { display: 'none' }
                   }
                 >
-                  {prayersCheckedIsAssign && (
+                  {prayersChecked.length !== 0 && (
                     <ShowCheckedPrayer
                       label={HideCheckText}
                       onViewText={() => {
@@ -237,7 +216,7 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
                     />
                   );
                 })}
-                {prayersCheckedIsAssign && (
+                {prayersChecked.length !== 0 && (
                   <View
                     style={
                       checkedPrayers ? styles.hideCheckTextContain : styles.showCheckTextContain
@@ -278,6 +257,10 @@ const ColumnsScreen = ({ route }: IColumnsScreen) => {
 export default ColumnsScreen;
 
 const styles = StyleSheet.create({
+  contentSafeArea: {
+    flex: 1,
+    backgroundColor: '#FFF',
+  },
   content: {
     backgroundColor: '#ffffff',
     height: '100%',
@@ -291,6 +274,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingRight: 15,
     height: 103,
+    width: '100%',
+  },
+  headerSlider: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     width: '100%',
   },
   screenTitle: {
@@ -316,6 +306,16 @@ const styles = StyleSheet.create({
     width: '50%',
     paddingBottom: 16,
   },
+  subColorActive: { color: '#72A8BC' },
+  subColorNotActive: { color: '#C8C8C8' },
+  imageAddPrayer: {
+    width: 15,
+    height: 15,
+  },
+  imageSettings: { 
+    width: 24, 
+    height: 24 
+  },
   viewSecondSubButt: {
     width: '50%',
     display: 'flex',
@@ -333,6 +333,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 16,
+  },
+  subCount: {
+    marginLeft: 2,
+    width: 16,
+    height: 16,
+    backgroundColor: '#AC5253',
+    borderRadius: 9999,
+    display: 'flex',
+    paddingLeft: 5,
+    paddingTop: 1,
+  },
+  subCountText: {
+    fontSize: 9,
+    color: '#FFF',
   },
   body: {
     paddingTop: 15,
@@ -372,6 +386,8 @@ const styles = StyleSheet.create({
   },
   inputForm: {
     marginLeft: 14,
+    width: '100%',
+    height: '100%',
   },
   hideCheckTextContain: {
     width: 345,

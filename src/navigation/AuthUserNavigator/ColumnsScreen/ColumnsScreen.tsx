@@ -6,7 +6,6 @@ import {
   ScrollView,
   Pressable,
   Image,
-  TextInput,
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
@@ -25,19 +24,14 @@ const ColumnsScreen = () => {
 
   const handleNewColumn = () => {
     setViewAddInput(false);
-    let complete = false;
-    for (let i = 0; i < addNewColumnText.length; i++) {
-      if (addNewColumnText[i] !== ' ') {
-        complete = true;
-      }
-    }
-    if (complete) {
+    if (addNewColumnText.trim()) {
       dispatch(actions.columns.createColumnSaga({ title: addNewColumnText, description: '' }));
     }
     setAddNewColumnText('');
   };
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
+    <SafeAreaView style={styles.contentSafeArea}>
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.screenTitle}>My Deck</Text>
@@ -48,7 +42,7 @@ const ColumnsScreen = () => {
           >
             <Image
               source={require('../../../assets/image/Union.png')}
-              style={{ width: 15, height: 15 }}
+              style={styles.imageAddColumnForm}
             />
           </Pressable>
         </View>
@@ -82,6 +76,10 @@ const ColumnsScreen = () => {
 export default ColumnsScreen;
 
 const styles = StyleSheet.create({
+  contentSafeArea: {
+    flex: 1,
+    backgroundColor: '#FFF',
+  },
   content: {
     backgroundColor: '#ffffff',
     height: '100%',
@@ -101,6 +99,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 20,
     marginRight: '36%',
+  },
+  imageAddColumnForm: {
+    width: 15,
+    height: 15,
   },
   body: {
     paddingTop: 15,

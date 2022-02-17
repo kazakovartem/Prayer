@@ -14,22 +14,22 @@ type CommentProps = {
   count: number;
 };
 
-const Comment: FC<CommentProps> = (props) => {
+const Comment: FC<CommentProps> = ({ idComment, count }) => {
   const [viewAddInput, setViewAddInput] = useState(false);
-  const comment = useSelector(selectors.comments.selectCommentById(props.idComment));
+  const comment = useSelector(selectors.comments.selectCommentById(idComment));
   const user = useSelector(selectors.user.selectUser());
   let inputValueLocal = '';
   if (comment?.body) {
     inputValueLocal = comment?.body;
   }
-  const [textInputUpdate, setOnChangeTextInputUpdate] = useState(inputValueLocal);
+  const [textInputUpdate, setTextInputUpdate] = useState(inputValueLocal);
   const dispatch = useDispatch();
   const image = [
     require('../../../../../assets/image/comment.png'),
     require('../../../../../assets/image/FirstMember.png'),
     require('../../../../../assets/image/SecondMember.png'),
   ];
-  const countImage = props.count % 3;
+  const countImage = count % 3;
   let idLocal = 0;
   if (comment?.id) {
     idLocal = comment?.id;
@@ -39,10 +39,10 @@ const Comment: FC<CommentProps> = (props) => {
     if (!viewAddInput) {
       setViewAddInput(true);
     } else {
-      if (textInputUpdate !== inputValueLocal) {
+      if (textInputUpdate !== inputValueLocal && textInputUpdate.trim()) {
         dispatch(actions.comments.updateCommentSaga({ id: idLocal, body: textInputUpdate }));
       }
-      setOnChangeTextInputUpdate(textInputUpdate);
+      setTextInputUpdate(textInputUpdate);
       setViewAddInput(false);
     }
   };
@@ -80,18 +80,15 @@ const Comment: FC<CommentProps> = (props) => {
         <View style={styles.containerContent}>
           {viewAddInput && (
             <View style={styles.newColl}>
-              <Image
-                source={image[countImage]}
-                style={{ marginLeft: 14, marginTop: 14, borderRadius: 20, width: 46, height: 46 }}
-              />
-              <View style={{ display: 'flex', flexDirection: 'column', height: 50, marginLeft: 9 }}>
-                <View style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
-                  <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
-                  <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
+              <Image source={image[countImage]} style={styles.imageCommentIcon} />
+              <View style={styles.commentsContent}>
+                <View style={styles.userInformContainInChange}>
+                  <Text style={styles.userNameText}>{user.name}</Text>
+                  <Text style={styles.userTimeText}>{timeDay} days ago</Text>
                 </View>
                 <InputChangeInComponent
                   value={textInputUpdate}
-                  onChangeText={setOnChangeTextInputUpdate}
+                  onChangeText={setTextInputUpdate}
                   containerStyle={styles.textInput}
                 />
               </View>
@@ -99,26 +96,14 @@ const Comment: FC<CommentProps> = (props) => {
           )}
           {!viewAddInput && (
             <View style={styles.touch}>
-              <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <Image
-                  source={image[countImage]}
-                  style={{ marginLeft: 14, marginTop: 14, borderRadius: 20, width: 46, height: 46 }}
-                />
-                <View
-                  style={{ display: 'flex', flexDirection: 'column', height: 50, marginLeft: 9 }}
-                >
-                  <View
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      marginTop: 15,
-                      marginBottom: 2,
-                    }}
-                  >
-                    <Text style={{ fontSize: 17, marginRight: 6 }}>{user.name}</Text>
-                    <Text style={{ fontSize: 13, color: '#9C9C9C' }}>{timeDay} days ago</Text>
+              <View style={styles.touchContain}>
+                <Image source={image[countImage]} style={styles.imageCommentIcon} />
+                <View style={styles.commentsContentMain}>
+                  <View style={styles.userInformContainInMain}>
+                    <Text style={styles.userNameText}>{user.name}</Text>
+                    <Text style={styles.userTimeText}>{timeDay} days ago</Text>
                   </View>
-                  <Text style={{ fontSize: 17 }}>{comment?.body}</Text>
+                  <Text style={styles.commentText}>{comment?.body}</Text>
                 </View>
               </View>
             </View>
@@ -149,6 +134,51 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  imageCommentIcon: {
+    marginLeft: 14,
+    marginTop: 14,
+    borderRadius: 20,
+    width: 46,
+    height: 46,
+  },
+  userInformContainInChange: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 5,
+  },
+  userNameText: {
+    fontSize: 17,
+    marginRight: 6,
+  },
+  userTimeText: {
+    fontSize: 13,
+    color: '#9C9C9C',
+  },
+  commentText: {
+    fontSize: 17,
+  },
+  commentsContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: 50,
+    marginLeft: 9,
+  },
+  commentsContentMain: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: 50,
+    marginLeft: 9,
+  },
+  touchContain: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  userInformContainInMain: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 15,
+    marginBottom: 2,
   },
   containerContent: {
     width: '100%',

@@ -18,42 +18,41 @@ type PrayerProps = {
   isChecked: boolean;
 };
 
-const Prayer: FC<PrayerProps> = (props) => {
+const Prayer: FC<PrayerProps> = ({ label, idPrayer, isChecked }) => {
   const navigation = useNavigation<authScreenProp>();
   const dispatch = useDispatch();
   const [viewUpdateInput, setViewUpdateInput] = useState(false);
-  const [text, setOnChangeText] = useState(props.label);
-  const prayer = useSelector(selectors.prayers.selectPrayerById(props.idPrayer));
+  const [textInputToChangeTitle, setTextInputToChangeTitle] = useState(label);
+  const prayer = useSelector(selectors.prayers.selectPrayerById(idPrayer));
 
   const handleDeletePrayer = () => {
     let idComments: number[] = [];
     if (prayer?.commentsIds) {
       idComments = prayer?.commentsIds;
     }
-    dispatch(actions.prayers.deletePrayerSaga({ id: props.idPrayer, idComments: idComments }));
+    dispatch(actions.prayers.deletePrayerSaga({ id: idPrayer, idComments: idComments }));
   };
 
   const handleUpdatePrayer = () => {
     if (!viewUpdateInput) {
       setViewUpdateInput(true);
     } else {
-      if (text !== props.label) {
+      if (textInputToChangeTitle !== label && textInputToChangeTitle.trim()) {
         let idLocal = 0;
-        let descriptionLocal = '';
         if (prayer?.id) {
           idLocal = prayer?.id;
         }
         dispatch(
           actions.prayers.updatePrayerSaga({
-            id: props.idPrayer,
-            title: text,
-            description: descriptionLocal,
-            checked: props.isChecked,
+            id: idPrayer,
+            title: textInputToChangeTitle,
+            description: '',
+            checked: isChecked,
             commentsIds: null,
           }),
         );
       }
-      setOnChangeText(text);
+      setTextInputToChangeTitle(textInputToChangeTitle);
       setViewUpdateInput(false);
     }
   };
@@ -66,10 +65,10 @@ const Prayer: FC<PrayerProps> = (props) => {
     }
     dispatch(
       actions.prayers.updatePrayerSaga({
-        id: props.idPrayer,
+        id: idPrayer,
         title: titleLocal,
         description: descriptionLocal,
-        checked: !props.isChecked,
+        checked: !isChecked,
         commentsIds: null,
       }),
     );
@@ -96,55 +95,56 @@ const Prayer: FC<PrayerProps> = (props) => {
         </View>
         <View style={styles.container}>
           <View style={styles.containerContent}>
-            <View style={styles.containerContentInside}>
-              <View style={styles.colorLine}></View>
-              {viewUpdateInput && (
-                <View style={styles.newColl}>
-                  <InputChangeInComponent
-                    value={text}
-                    onChangeText={setOnChangeText}
-                    containerStyle={styles.textInput}
-                  />
-                </View>
-              )}
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate(Routes.Prayer, {
+                  itemId: idPrayer,
+                  otherParam: 'anything you want here',
+                });
+              }}
+            >
+              <View style={styles.containerContentInside}>
+                <View style={styles.colorLine}></View>
+                {viewUpdateInput && (
+                  <View style={styles.newColl}>
+                    <InputChangeInComponent
+                      value={textInputToChangeTitle}
+                      onChangeText={setTextInputToChangeTitle}
+                      containerStyle={styles.textInput}
+                    />
+                  </View>
+                )}
 
-              {!viewUpdateInput && (
-                <View style={styles.touch}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      handleCheckPrayer();
-                    }}
-                  >
-                    <View style={styles.touchCheckBox}>
-                      {props.isChecked && (
-                        <Image source={require('../../../../../assets/image/Check.png')} />
-                      )}
+                {!viewUpdateInput && (
+                  <View style={styles.touch}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        handleCheckPrayer();
+                      }}
+                    >
+                      <View style={styles.touchCheckBox}>
+                        {isChecked && (
+                          <Image source={require('../../../../../assets/image/Check.png')} />
+                        )}
+                      </View>
+                    </TouchableOpacity>
+
+                    <View style={styles.text}>
+                      <Text style={isChecked ? { textDecorationLine: 'line-through' } : {}}>
+                        {label}
+                      </Text>
                     </View>
-                  </TouchableOpacity>
+                  </View>
+                )}
 
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.navigate(Routes.Prayer, {
-                        itemId: props.idPrayer,
-                        otherParam: 'anything you want here',
-                      });
-                    }}
-                    style={styles.text}
-                  >
-                    <Text style={props.isChecked ? { textDecorationLine: 'line-through' } : {}}>
-                      {props.label}
-                    </Text>
-                  </TouchableOpacity>
+                <View style={styles.iconContain}>
+                  <Image source={require('../../../../../assets/image/userIcon.png')} />
+                  <Text style={styles.iconContainText}>3</Text>
+                  <Image source={require('../../../../../assets/image/prayerBlue.png')} />
+                  <Text style={styles.iconContainText}>123</Text>
                 </View>
-              )}
-
-              <View style={styles.iconContain}>
-                <Image source={require('../../../../../assets/image/userIcon.png')} />
-                <Text style={styles.iconContainText}>3</Text>
-                <Image source={require('../../../../../assets/image/prayerBlue.png')} />
-                <Text style={styles.iconContainText}>123</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
       </SwipeRow>

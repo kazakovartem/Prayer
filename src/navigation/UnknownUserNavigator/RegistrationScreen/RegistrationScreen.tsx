@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
   SafeAreaView,
   ActivityIndicator,
@@ -51,7 +50,7 @@ const RegistrationScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
+    <SafeAreaView style={styles.contentSafeArea}>
       <View style={styles.content}>
         <LoginHeader label="Sign-Up" />
         <View style={styles.body}>
@@ -65,7 +64,7 @@ const RegistrationScreen = () => {
             )}
             name="email"
           />
-          {errors.email && <Text style={{ color: 'red' }}>This is required.</Text>}
+          {errors.email && <Text style={styles.colorRed}>This is required.</Text>}
 
           <Controller
             control={control}
@@ -78,7 +77,7 @@ const RegistrationScreen = () => {
             )}
             name="name"
           />
-          {errors.name && <Text style={{ color: 'red' }}>This is very simple.</Text>}
+          {errors.name && <Text style={styles.colorRed}>This is very simple.</Text>}
 
           <Controller
             control={control}
@@ -91,8 +90,8 @@ const RegistrationScreen = () => {
             )}
             name="password"
           />
-          {errors.password && <Text style={{ color: 'red' }}>This is very simple.</Text>}
-          {expectationUser && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
+          {errors.password && <Text style={styles.colorRed}>This is very simple.</Text>}
+          {expectationUser && <ActivityIndicator size="large" style={styles.activeIndicate} />}
           {!expectationUser && (
             <View style={expectationUser ? { display: 'none' } : styles.buttonContain}>
               <SignInButton label={'Sign-UP'} onPress={handleSubmit(onSubmit)} />
@@ -116,6 +115,10 @@ const RegistrationScreen = () => {
 export default RegistrationScreen;
 
 const styles = StyleSheet.create({
+  contentSafeArea: {
+    flex: 1,
+    backgroundColor: '#FFF',
+  },
   content: {
     backgroundColor: '#ffffff',
     height: '100%',
@@ -144,5 +147,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  colorRed: {
+    color: 'red',
+  },
+  activeIndicate: {
+    marginTop: 32,
   },
 });
